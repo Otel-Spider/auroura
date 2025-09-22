@@ -1,0 +1,148 @@
+/* Design Tokens */
+:root {
+    --fac-bg: #11163a; /* deep navy */
+    --fac-bg-grad: #0b1030; /* darker bottom */
+    --fac-ink: #e8e9ef; /* title text */
+    --fac-muted: #bec3cf; /* labels */
+    --fac-sand: #c9b98e; /* icons and accents */
+}
+
+/* Main Section */
+.fac-section {
+    background: linear-gradient(
+        180deg,
+        var(--fac-bg) 0%,
+        var(--fac-bg-grad) 100%
+    );
+    color: var(--fac-muted);
+}
+
+/* Title Styling */
+.fac-title {
+    font-family: "Georgia", "Times New Roman", serif;
+    color: var(--fac-ink);
+    font-weight: 500;
+    line-height: 1.05;
+    font-size: clamp(1.8rem, 3.6vw, 3.8rem);
+    letter-spacing: 0.2px;
+    margin: 0;
+    text-align: left;
+}
+
+/* Grid Container */
+.fac-grid {
+    transition: max-height 0.35s ease;
+    overflow: hidden;
+}
+
+/* Individual Facility Item */
+.fac-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.5rem 0;
+}
+
+/* Icon Styling */
+.fac-ico {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+    color: var(--fac-sand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Label Styling */
+.fac-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    color: var(--fac-muted);
+}
+
+/* Toggle Button */
+.fac-toggle {
+    margin-top: 1.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--fac-sand);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    justify-content: flex-start;
+    align-self: flex-start;
+}
+
+.fac-toggle:hover {
+    color: #d4c49a;
+    transform: translateY(-1px);
+}
+
+.fac-toggle .chev {
+    transition: transform 0.25s ease;
+}
+
+.fac-toggle[aria-expanded="true"] .chev {
+    transform: rotate(180deg);
+}
+
+/* Spacing Helper */
+.py-6 {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+}
+
+/* Container Large Utility */
+.container-lg {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Mobile Polish */
+@media (max-width: 575.98px) {
+    .fac-title {
+        margin-bottom: 1.25rem;
+    }
+
+    .fac-item {
+        gap: 10px;
+    }
+
+    .fac-ico {
+        width: 24px;
+        height: 24px;
+        flex: 0 0 24px;
+    }
+
+    .fac-label {
+        font-size: 0.9rem;
+    }
+
+    .fac-toggle {
+        font-size: 0.85rem;
+        margin-top: 1.5rem;
+    }
+}
+
+/* Tablet Adjustments */
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .fac-title {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Desktop Adjustments */
+@media (min-width: 992px) {
+    .fac-title {
+
+    }
+}

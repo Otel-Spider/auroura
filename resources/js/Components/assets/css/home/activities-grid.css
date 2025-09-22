@@ -1,0 +1,154 @@
+/* Design Tokens */
+:root {
+  --ag-navy: #0f1d35;
+  --ag-text: #111321;
+  --ag-muted: #6f7380;
+  --ag-gap: 2rem;
+}
+
+/* Section */
+.activities-grid-section {
+  padding: var(--ag-gap) 0;
+  background: #fff;
+}
+
+/* Title */
+.activities-title {
+  font-family: "Georgia", "Times New Roman", serif;
+  color: var(--ag-navy);
+  font-weight: 500;
+  line-height: 1.1;
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+/* Card */
+.activity-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+/* Image */
+.activity-image {
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background: #f8f9fa;
+}
+
+.activity-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.activity-image:hover img {
+  transform: scale(1.03);
+}
+
+/* Content */
+.activity-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.activities-grid-section .activity-title {
+  color: var(--ag-text);
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+}
+
+.activity-description {
+  color: var(--ag-muted);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+  flex: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+  .activities-grid-section {
+    padding: calc(var(--ag-gap) * 0.8) 0;
+  }
+
+  .activities-title {
+    margin-bottom: 1.5rem;
+  }
+
+  .activities-grid-section .activity-title {
+    font-size: 1.05rem;
+  }
+
+  .activity-description {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .activities-grid-section {
+    padding: calc(var(--ag-gap) * 0.7) 0;
+  }
+
+  .activities-title {
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+
+  .activity-card {
+    margin-bottom: 1.5rem;
+  }
+
+  .activity-card:last-child {
+    margin-bottom: 0;
+  }
+
+  .activity-image {
+    margin-bottom: 0.875rem;
+  }
+
+  .activities-grid-section  .activity-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .activity-description {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .activities-grid-section {
+    padding: calc(var(--ag-gap) * 0.6) 0;
+  }
+
+  .activities-title {
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
+    margin-bottom: 1rem;
+  }
+
+  .activity-card {
+    margin-bottom: 1.25rem;
+  }
+
+  .activity-image {
+    margin-bottom: 0.75rem;
+  }
+
+  .activities-grid-section  .activity-title {
+    font-size: 0.95rem;
+  }
+
+  .activity-description {
+    font-size: 0.85rem;
+  }
+}

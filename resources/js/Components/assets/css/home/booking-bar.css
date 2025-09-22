@@ -1,0 +1,980 @@
+/* Design Tokens */
+:root {
+    --bk-cream: #f4f0e7;
+    --bk-cream-border: #e7e0d4;
+    --bk-text: #111321;
+    --bk-muted: #6b6f7b;
+    --bk-gold: #7e6936;
+    --bk-gold-dark: #5f4f2a;
+    --bk-serif: "Georgia", "Times New Roman", serif;
+
+    /* Round button tokens */
+    --bb-gold: #7e6936;
+    --bb-gold-ink: #fff;
+    --bb-muted: #d6d0c5;
+    --bb-muted-ink: #6f6b64;
+    --bb-border: #e7e0d4;
+    --bb-text: #111321;
+}
+
+/* Main Booking Section */
+.booking-section {
+    padding: 3rem 0;
+    background-color: #fff;
+    position: relative;
+    z-index: 1;
+}
+
+.booking-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Title */
+.booking-title {
+    text-align: center;
+    font-family: var(--bk-serif);
+    font-size: clamp(1.6rem, 2.8vw, 2.75rem);
+    font-weight: 500;
+    color: var(--bk-text);
+    margin: 0 0 1.25rem 0;
+    line-height: 1.2;
+}
+
+/* Booking Card */
+.booking-card {
+    background: var(--bk-cream);
+    border: 1px solid var(--bk-cream-border);
+    border-radius: 12px;
+    padding: 1.25rem 1.75rem;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Sticky Booking Bar */
+.sticky-booking-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: #f4f0e7;
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--bk-cream-border);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    animation: slideUp 0.3s ease-out;
+    transform: translateZ(0);
+    will-change: transform;
+    transition: all 0.3s ease;
+}
+
+/* Sticky Booking Bar - Top Position (near footer) */
+.sticky-booking-bar.sticky-top {
+    bottom: auto;
+    top: 0;
+    border-top: none;
+    border-bottom: 1px solid var(--bk-cream-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    animation: slideDown 0.3s ease-out;
+}
+
+.sticky-booking-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.sticky-booking-card {
+    border-radius: 12px 12px 0 0;
+    padding: 1rem 1.75rem;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.bk-fields {
+    display: flex;
+    gap: 1rem;
+    flex: 1;
+}
+
+/* Field Controls */
+.bk-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-height: 64px;
+    border: 1px solid var(--bk-cream-border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    width: 100%;
+}
+
+.bk-field:hover {
+    border-color: var(--bk-gold);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.bk-field:focus {
+    outline: 2px solid var(--bk-gold);
+    outline-offset: 2px;
+    border-color: var(--bk-gold);
+}
+
+.bk-field:active {
+    transform: translateY(0);
+}
+
+/* Field Labels */
+.field-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--bk-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+/* Field Values */
+.field-value {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+}
+
+.field-value svg {
+    color: var(--bk-muted);
+    flex-shrink: 0;
+}
+
+.value-text {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--bk-text);
+    flex: 1;
+}
+
+/* Desktop Layout - Dates and Guests */
+.bk-dates {
+    flex: 0 0 200px;
+}
+
+.bk-guests {
+    flex: 0 0 200px;
+}
+
+/* Price Section */
+.bk-price {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    min-width: 200px;
+}
+
+.price-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.price-amount {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    font-weight: 700;
+    color: var(--bk-text);
+}
+
+.currency {
+    font-size: 1rem;
+    color: var(--bk-muted);
+}
+
+.amount {
+    font-size: 1.5rem;
+    color: var(--bk-text);
+}
+
+.price-meta {
+    font-size: 0.75rem;
+    color: var(--bk-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: right;
+}
+
+/* CTA Button */
+.bk-cta {
+    background: var(--bk-gold);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.9rem 1.25rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    min-width: 120px;
+}
+
+.bk-cta:hover {
+    background: var(--bk-gold-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.bk-cta:focus {
+    outline: 2px solid var(--bk-gold);
+    outline-offset: 2px;
+}
+
+.bk-cta:active {
+    transform: translateY(0);
+}
+
+/* Mobile Responsive */
+@media (max-width: 991.98px) {
+    .booking-container {
+        padding: 0 1rem;
+    }
+
+    .booking-card {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem 1rem;
+    }
+
+    .bk-fields {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .bk-field {
+        width: 100%;
+        min-height: 56px;
+    }
+
+    .bk-price {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        min-width: auto;
+        gap: 1rem;
+        margin-left: 0;
+    }
+
+    .price-text {
+        align-items: center;
+    }
+
+    .price-amount {
+        justify-content: center;
+    }
+
+    .price-meta {
+        text-align: center;
+    }
+
+    .bk-cta {
+        width: 100%;
+        padding: 1rem 1.25rem;
+        font-size: 1rem;
+    }
+}
+
+/* Mobile responsive for datepicker */
+@media (max-width: 575.98px) {
+    .cal-months {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .booking-section {
+        padding: 2rem 0;
+    }
+
+    .booking-title {
+        font-size: clamp(1.4rem, 5vw, 2rem);
+        margin-bottom: 1rem;
+    }
+
+    .booking-card {
+        padding: 1rem;
+        gap: 0.75rem;
+    }
+
+    .bk-field {
+        min-height: 52px;
+        padding: 0.6rem 0.8rem;
+    }
+
+    .field-value {
+        gap: 0.5rem;
+    }
+
+    .value-text {
+        font-size: 0.9rem;
+    }
+
+    .amount {
+        font-size: 1.25rem;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .bk-field:focus,
+    .bk-cta:focus {
+        outline: 3px solid var(--bk-gold);
+        outline-offset: 3px;
+    }
+
+    .booking-card {
+        border: 2px solid var(--bk-cream-border);
+    }
+
+    .bk-field {
+        border: 2px solid var(--bk-cream-border);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .bk-field,
+    .bk-cta {
+        transition: none;
+    }
+
+    .bk-field:hover,
+    .bk-cta:hover {
+        transform: none;
+    }
+}
+
+/* Round Button Styles */
+.btn-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s;
+}
+
+.btn-circle--gold {
+    background: var(--bb-gold);
+    color: var(--bb-gold-ink);
+}
+
+.btn-circle--muted {
+    background: var(--bb-muted);
+    color: var(--bb-muted-ink);
+}
+
+.btn-circle:not(:disabled):hover {
+    transform: translateY(-1px);
+}
+
+.btn-circle:focus-visible {
+    outline: 2px solid rgba(0, 0, 0, 0.25);
+    outline-offset: 2px;
+}
+
+.btn-circle:disabled {
+    opacity: 0.55;
+}
+
+/* Counter Row Styles */
+.counter-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    gap: 0.75rem;
+    border-bottom: 1px solid var(--bb-border);
+}
+
+.counter-row:last-child {
+    border-bottom: none;
+}
+
+.counter-label {
+    font-weight: 700;
+    color: var(--bb-text);
+}
+
+.counter-value {
+    min-width: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Dropdown Containers */
+.datepicker-dropdown,
+.guests-dropdown {
+    position: absolute;
+    top: 75.5px;
+    left: -44.5px;
+    z-index: 1050;
+    background: #fff;
+    border: 1px solid var(--bb-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    padding: 1rem;
+    width: auto;
+    min-width: 320px;
+    max-width: 640px;
+}
+
+/* Calendar Header */
+
+/* Calendar Grid */
+.calendar-grid {
+    width: 100%;
+}
+
+.calendar-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.calendar-day-name {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--bb-muted-ink);
+    padding: 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+}
+
+.calendar-day {
+    width: 100%;
+    height: 2.5rem;
+    border: none;
+    background: transparent;
+    color: var(--bb-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-day:hover:not(:disabled) {
+    background: var(--bb-muted);
+    color: var(--bb-text);
+}
+
+.calendar-day--empty {
+    cursor: default;
+    pointer-events: none;
+}
+
+.calendar-day--today {
+    background: var(--bb-gold);
+    color: var(--bb-gold-ink);
+    font-weight: 700;
+}
+
+.calendar-day--selected {
+    background: var(--bb-gold);
+    color: var(--bb-gold-ink);
+    font-weight: 700;
+}
+
+.calendar-day--in-range {
+    background: rgba(126, 105, 54, 0.1);
+    color: var(--bb-text);
+}
+
+.calendar-day--past {
+    color: var(--bb-muted-ink);
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.calendar-day:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.calendar-day--hover-range {
+    background: rgba(126, 105, 54, 0.2);
+    color: var(--bb-text);
+}
+
+/* Two Month Calendar */
+.two-month-calendar {
+    width: 100%;
+}
+
+.calendar-header-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--bb-border);
+}
+
+.calendar-header-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--bb-text);
+    text-align: center;
+    flex: 1;
+}
+
+.calendar-summary {
+    margin-bottom: 1rem;
+}
+
+.calendar-divider {
+    border: none;
+    border-top: 1px solid var(--bb-border);
+    margin: 0.75rem 0;
+}
+
+.summary-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.summary-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+}
+
+.calendar-icon {
+    color: var(--bb-gold);
+    display: flex;
+    align-items: center;
+}
+
+.selected-dates {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.date-range {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--bb-text);
+}
+
+.nights-count {
+    font-size: 0.8rem;
+    color: var(--bb-muted-ink);
+    font-weight: 400;
+}
+
+.reset-button {
+    background: transparent;
+    border: 1px solid var(--bb-border);
+    color: var(--bb-muted-ink);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.reset-button:hover:not(:disabled) {
+    background: var(--bb-muted);
+    color: var(--bb-text);
+    border-color: var(--bb-muted-ink);
+}
+
+.reset-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.calendar-months {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+}
+
+.calendar-month {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Responsive adjustments for two-month calendar */
+@media (max-width: 768px) {
+    .calendar-months {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .calendar-header-title {
+        font-size: 1rem;
+    }
+
+    .summary-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .selected-dates {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .reset-button {
+        align-self: flex-end;
+    }
+}
+
+/* Body scroll lock is handled via inline styles in JavaScript */
+
+/* Ensure header positioning */
+.header {
+    position: absolute !important;
+    z-index: 1000 !important;
+}
+
+/* Background section behind header */
+.header-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.header-container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 2rem !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+/* Mobile Edit Button & Off-Canvas */
+.mobile-edit-btn {
+    display: none;
+    top: 1rem;
+    right: 1rem;
+    background: var(--bk-gold);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.mobile-edit-btn:hover {
+    background: var(--bk-gold-dark);
+    transform: scale(1.05);
+}
+
+/* Mobile Off-Canvas */
+.mobile-offcanvas-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    display: flex;
+    align-items: flex-end;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.mobile-offcanvas {
+    background: white;
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s ease-out;
+    overflow: hidden;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.offcanvas-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--bk-cream-border);
+    position: relative;
+}
+
+.back-btn,
+.close-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: var(--bk-text);
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.back-btn:hover,
+.close-btn:hover {
+    background: var(--bk-cream);
+}
+
+.offcanvas-title {
+    font-family: var(--bk-serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--bk-text);
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.offcanvas-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+
+.offcanvas-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.option-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bk-cream);
+    border: 1px solid var(--bk-cream-border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.option-btn:hover {
+    background: #f0ebe0;
+    transform: translateY(-1px);
+}
+
+.option-info {
+    flex: 1;
+}
+
+.option-label {
+    font-size: 0.875rem;
+    color: var(--bk-muted);
+    margin-bottom: 0.25rem;
+}
+
+.option-value {
+    font-size: 1rem;
+    color: var(--bk-text);
+    font-weight: 500;
+}
+
+.offcanvas-dates,
+.offcanvas-guests {
+    /* Inherit styles from existing dropdowns */
+}
+
+/* Show mobile edit button only on mobile */
+@media (max-width: 768px) {
+    .mobile-edit-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Hide desktop dropdowns on mobile when off-canvas is used */
+    .booking-card {
+        position: relative;
+    }
+
+    /* Ensure off-canvas doesn't conflict with header */
+    .mobile-offcanvas-overlay {
+        z-index: 1001;
+        padding-top: 0;
+    }
+
+    /* Adjust off-canvas for smaller screens */
+    .mobile-offcanvas {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    /* Ensure content is properly contained */
+    .offcanvas-content {
+        padding: 1rem;
+    }
+
+    /* Mobile sticky booking bar */
+    .sticky-booking-container {
+        padding: 0 1rem;
+    }
+
+    .sticky-booking-card {
+        padding: 0.75rem 1rem;
+        gap: 1rem;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Hide fields in mobile sticky view */
+    .sticky-booking-card .bk-fields {
+        display: none;
+    }
+
+    /* Mobile sticky price section */
+    .sticky-booking-card .bk-price {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-left: 0;
+        min-width: auto;
+    }
+
+    .sticky-booking-card .price-text {
+        align-items: flex-start;
+        margin-bottom: 0.25rem;
+    }
+
+    .sticky-booking-card .price-amount {
+        justify-content: flex-start;
+    }
+
+    .sticky-booking-card .price-meta {
+        text-align: left;
+        font-size: 0.7rem;
+    }
+
+    /* Mobile sticky CTA button */
+    .sticky-booking-card .bk-cta {
+        width: auto;
+        min-width: 140px;
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* Mobile edit button in sticky bar */
+    .sticky-booking-card .mobile-edit-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bk-gold);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 0.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .sticky-booking-card .mobile-edit-btn:hover {
+        background: var(--bk-gold-dark);
+        transform: translateY(-1px);
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .mobile-offcanvas-overlay {
+        padding: 0;
+    }
+
+    .mobile-offcanvas {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .offcanvas-header {
+        padding: 0.75rem 1rem;
+    }
+
+    .offcanvas-content {
+        padding: 0.75rem;
+    }
+}

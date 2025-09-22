@@ -1,0 +1,366 @@
+/* Design Tokens */
+:root {
+  --as-navy: #0f1d35;
+  --as-text: #111321;
+  --as-muted: #6f7380;
+  --as-gold: #7e6936;
+  --as-track: #eae7de;
+  --as-bg: #f3f3f3;
+}
+
+/* Section */
+.activity-showcase {
+  padding: 5rem 0;
+  background: var(--as-bg);
+}
+
+/* Slider wrapper */
+.activity-slider-wrapper {
+  position: relative;
+  margin-left: 0vw;
+  width: 50vw;
+  max-width: none;
+  z-index: 0;
+}
+
+.activity-swiper .swiper {
+  overflow: visible;
+  margin: 0;
+  padding: 0 2rem;
+}
+
+/* Slide styles */
+.activity-slide {
+  height: auto;
+}
+
+.activity-image {
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+}
+
+.activity-image:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.activity-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+  display: block;
+}
+
+.activity-image:hover img {
+  transform: scale(1.05);
+}
+
+/* Desktop navigation arrows */
+.activity-arrows {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.activity-arrow {
+  pointer-events: auto;
+  position: absolute;
+  top: 0%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: 0;
+  color: #fff;
+  background: var(--as-gold);
+  z-index: 20;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activity-arrow:hover {
+  background: #6b5a2a;
+}
+
+.activity-arrow:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Position arrows on the left side */
+.activity-prev {
+  left: 32px;
+  border-radius: 22px 0 0 22px;
+}
+
+.activity-next {
+  left: 75px;
+  border-radius: 0 22px 22px 0;
+}
+
+/* Controls section */
+.activity-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  gap: 1rem;
+  margin-left: 10vw;
+  width: 40vw;
+}
+
+/* Progress bar */
+.activity-progress {
+  flex: 1;
+  height: 4px;
+  background: var(--as-track);
+  border-radius: 999px;
+  position: relative;
+  overflow: hidden;
+}
+
+.activity-progress::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 40px; /* Fixed width line */
+  background: var(--as-gold);
+  left: calc(var(--as-page, 0) * (100% - 40px));
+  transition: left 0.25s ease;
+  border-radius: 2px;
+}
+
+/* View gallery button */
+.activity-view-gallery {
+  background: transparent;
+  border: 0;
+  color: var(--as-text);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.activity-view-gallery:hover {
+  color: var(--as-gold);
+}
+
+/* Content section */
+.activity-content {
+  padding: 1rem 0;
+}
+
+/* Title */
+.activity-showcase .activity-title {
+  font-family: "Georgia", "Times New Roman", serif;
+  color: var(--as-navy);
+  font-weight: 500;
+  line-height: 1.1;
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+/* Description */
+.activity-description {
+  margin-bottom: 1.5rem;
+}
+
+.activity-description p {
+  color: var(--as-text);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  text-align: left;
+  margin-right: 10rem;
+}
+
+.activity-description p:last-child {
+  margin-bottom: 0;
+}
+
+/* Mobile navigation pill */
+.activity-mobile-nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.activity-nav-pill {
+  display: flex;
+  background: var(--as-gold);
+  border-radius: 22px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.activity-mobile-arrow {
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  color: #fff;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  position: relative;
+}
+
+.activity-mobile-arrow:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.activity-mobile-arrow + .activity-mobile-arrow {
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.activity-mobile-arrow:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1199.98px) {
+  .activity-prev {
+    left: 0px;
+  }
+
+  .activity-next {
+    left: 0px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .activity-showcase {
+    padding: 4rem 0;
+  }
+
+  .activity-slider-wrapper {
+    margin-right: 20vw;
+    width: 100vw;
+  }
+
+  .activity-controls {
+    margin-right: 20vw;
+    width: 40vw;
+  }
+
+  .activity-content {
+    padding: 2rem 0 0;
+  }
+
+  .activity-showcase .activity-title {
+    margin-bottom: 1.25rem;
+  }
+
+  .activity-description p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .activity-showcase {
+    padding: 3rem 0;
+  }
+
+  .activity-slider-wrapper {
+    margin-right: 20vw;
+    width: 100vw;
+  }
+
+  .activity-swiper .swiper {
+    padding: 0 1rem;
+  }
+
+  .activity-controls {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.25rem;
+    margin-right: 20vw;
+    width: 70vw;
+  }
+
+  .activity-progress {
+    flex: 1;
+    max-width: 200px;
+  }
+
+  .activity-view-gallery {
+    font-size: 0.8rem;
+  }
+
+  .activity-content {
+    padding: 1.5rem 0 0;
+    text-align: center;
+  }
+
+  .activity-showcase .activity-title {
+    margin-bottom: 1rem;
+  }
+
+  .activity-description p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .activity-showcase {
+    padding: 2.5rem 0;
+  }
+
+  .activity-slider-wrapper {
+    margin-right: 10vw;
+    width: 100vw;
+  }
+
+  .activity-controls {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    margin-right: 10vw;
+    width: 50vw;
+  }
+
+  .activity-progress {
+    flex: 1;
+    max-width: 150px;
+  }
+
+  .activity-content {
+    padding: 1rem 0 0;
+  }
+
+  .activity-showcase .activity-title {
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .activity-description p {
+    font-size: 0.9rem;
+  }
+}
