@@ -40,7 +40,7 @@ const SiteFooter = ({
     { label: "Legal Notice", href: "#" },
     { label: "Do Not Sell My Personal Information", href: "#" },
   ],
-  copyrightText = "© 2025 All Rights Reserved"
+  copyrightText = "© 200025 All Rights Reserved"
 }) => {
   return (
     <footer className="site-footer">
