@@ -20,7 +20,7 @@ class BookingBarController extends Controller
         if (!$bookingBar) {
             // Return default data if no booking bar settings exist
             return response()->json([
-                'title' => 'Book your next ALL Inclusive Collection experience',
+                'title' => 'Book your all-inclusive Red Sea escape today.',
                 'date_label' => 'Dates',
                 'date_value' => '09 Oct – 14 Oct',
                 'guests_label' => 'Rooms & Guests',

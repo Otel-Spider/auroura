@@ -3,7 +3,7 @@
     --rooms-navy: #0f1d35;
     --rooms-text: #111321;
     --rooms-muted: #6f7380;
-    --rooms-gold: #7e6936; /* button/arrow gold */
+    --rooms-gold: #d1bb4f; /* button/arrow gold */
     --rooms-sand: #c9b98e; /* light gold / accents */
     --rooms-track: #ddd7c8; /* progress track */
 }
@@ -100,6 +100,7 @@
 
 .rooms-cover {
     overflow: hidden;
+    height: 250px; /* Fixed height for consistent image dimensions */
 }
 
 .rooms-cover img {
@@ -194,7 +195,7 @@
 }
 
 .rooms-cta:hover {
-    background: #6b5a2a;
+    background: #b8a542;
     color: #fff;
 }
 
@@ -230,7 +231,7 @@
 }
 
 .rooms-arrow:hover {
-    background: #6b5a2a;
+    background: #b8a542;
 }
 
 .rooms-arrow + .rooms-arrow {
@@ -352,5 +353,9 @@
     .rooms-arrow {
         width: 40px;
         height: 40px;
+    }
+
+    .rooms-cover {
+        height: 200px; /* Smaller height on mobile */
     }
 }

@@ -9,7 +9,7 @@ const RatingStars = ({ rating, size = 20, className = "" }) => {
 
   for (let i = 0; i < 5; i++) {
     let fillPercentage = 0;
-    
+
     if (i < fullStars) {
       fillPercentage = 100;
     } else if (i === fullStars && hasHalfStar) {
@@ -43,8 +43,8 @@ const RatingStars = ({ rating, size = 20, className = "" }) => {
   }
 
   return (
-    <div 
-      className="rating-stars" 
+    <div
+      className="rating-stars"
       aria-label={`Rating: ${rating} out of 5`}
       role="img"
     >
@@ -56,7 +56,7 @@ const RatingStars = ({ rating, size = 20, className = "" }) => {
 // Individual Review Component
 const ReviewItem = ({ review, theme }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  
+
   const formatDate = (dateISO) => {
     const date = new Date(dateISO);
     const day = date.getDate().toString().padStart(2, '0');
@@ -80,13 +80,13 @@ const ReviewItem = ({ review, theme }) => {
           <div className="review-date">{formatDate(review.dateISO)}</div>
         </div>
       </div>
-      
+
       <div className="review-rating">
         <RatingStars rating={review.rating} size={16} />
       </div>
-      
+
       <div className="review-body">
-        <p 
+        <p
           className={`review-text ${isExpanded ? 'expanded' : 'collapsed'}`}
           style={{ color: theme.text }}
         >
@@ -119,10 +119,10 @@ const GuestReviews = ({
   theme = {}
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  
+
   // Merge theme with defaults
   const mergedTheme = useMemo(() => ({
-    accent: '#a89052',
+    accent: '#d1bb4f',
     heading: '#0f1d35',
     text: '#111321',
     muted: '#6f7380',
@@ -147,21 +147,21 @@ const GuestReviews = ({
           {/* Left Column - Heading */}
           <div className="col-12 col-lg-5">
             <div className="reviews-intro">
-              <h2 
+              <h2
                 className="reviews-heading"
                 style={{ color: mergedTheme.heading }}
               >
                 {heading}
               </h2>
-              
-              <p 
+
+              <p
                 className="reviews-subtitle"
                 style={{ color: mergedTheme.muted }}
               >
                 {subtitle}
               </p>
-              
-              <a 
+
+              <a
                 href={learnMoreHref}
                 className="reviews-learn-more"
                 style={{ color: mergedTheme.accent }}
@@ -175,29 +175,29 @@ const GuestReviews = ({
           <div className="col-12 col-lg-7">
             <div className="reviews-content">
               {/* Aggregate Rating Box */}
-              <div 
+              <div
                 className="aggregate-rating"
                 style={{ backgroundColor: mergedTheme.cardBg }}
               >
                 <div className="aggregate-score">
-                  <span 
+                  <span
                     className="score-number"
                     style={{ color: mergedTheme.heading }}
                   >
                     {aggregate.score}
                   </span>
-                  <span 
+                  <span
                     className="score-out-of"
                     style={{ color: mergedTheme.muted }}
                   >
                     /{aggregate.outOf}
                   </span>
                 </div>
-                
+
                 <div className="aggregate-details">
                   <div className="stars-and-count">
                     <RatingStars rating={aggregate.score} size={20} />
-                    <span 
+                    <span
                       className="review-count"
                       style={{ color: mergedTheme.muted }}
                     >
@@ -225,7 +225,7 @@ const GuestReviews = ({
                   <button
                     className="load-more-btn"
                     onClick={loadMore}
-                    style={{ 
+                    style={{
                       color: mergedTheme.accent,
                       borderColor: mergedTheme.accent
                     }}

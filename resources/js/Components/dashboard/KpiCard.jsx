@@ -9,7 +9,7 @@ const KpiCard = ({ title, value, trend, trendType, icon }) => {
   };
 
   return (
-    <Card className="h-100 p-3 p-md-4">
+    <Card className="p-3 h-100 p-md-3">
       <div className="kpi">
         <div className="kpi-body">
           <div className="kpi-title">{title}</div>

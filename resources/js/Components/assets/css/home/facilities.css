@@ -1,7 +1,7 @@
 /* Design Tokens */
 :root {
-    --fac-bg: #11163a; /* deep navy */
-    --fac-bg-grad: #0b1030; /* darker bottom */
+    --fac-bg: #333333; /* deep navy */
+    --fac-bg-grad: #333333; /* darker bottom */
     --fac-ink: #e8e9ef; /* title text */
     --fac-muted: #bec3cf; /* labels */
     --fac-sand: #c9b98e; /* icons and accents */
@@ -9,11 +9,7 @@
 
 /* Main Section */
 .fac-section {
-    background: linear-gradient(
-        180deg,
-        var(--fac-bg) 0%,
-        var(--fac-bg-grad) 100%
-    );
+    background: var(--fac-bg);
     color: var(--fac-muted);
 }
 
@@ -48,7 +44,7 @@
     width: 28px;
     height: 28px;
     flex: 0 0 28px;
-    color: var(--fac-sand);
+    color: #f0c43b;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,7 +64,7 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    color: var(--fac-sand);
+    color: #f0c43b;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -143,6 +139,5 @@
 /* Desktop Adjustments */
 @media (min-width: 992px) {
     .fac-title {
-
     }
 }

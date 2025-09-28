@@ -1,23 +1,23 @@
 export const activitiesData = [
     {
         id: "1",
-        title: "Tennis Courts",
-        description: "Professional-grade tennis courts with coaching services available. Perfect for both beginners and advanced players looking to improve their game.",
-        image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=450&fit=crop",
-        alt: "Professional tennis courts with net and court markings"
-    },
-    {
-        id: "2",
-        title: "Fitness Center",
-        description: "State-of-the-art gym equipment with personal training sessions. Open 24/7 with cardio machines, weight training, and group fitness classes.",
+        title: "Modern Gym",
+        description: "Our fully equipped fitness center features the latest machines and free weights, giving you everything you need to keep your routine on track while on holiday.",
         image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=450&fit=crop",
         alt: "Modern fitness center with exercise equipment"
     },
     {
+        id: "2",
+        title: "Group Classes",
+        description: "Join energizing group workouts, from yoga to aerobics, led by professional instructors. A fun and social way to stay active during your getaway.",
+        image: "/storage/Sports/DSC03867-HDR.png",
+        alt: "Group fitness class with instructor and participants"
+    },
+    {
         id: "3",
-        title: "Water Sports",
-        description: "Exciting water activities including kayaking, paddleboarding, and snorkeling. All equipment provided with professional instructors for safety.",
-        image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=450&fit=crop",
-        alt: "Water sports activities including kayaking and paddleboarding"
+        title: "Personal Wellness",
+        description: "Take your fitness further with tailored programs designed to match your goals. Enjoy a healthy balance of training, relaxation, and motivation throughout your stay.",
+        image: "/storage/Sports/GYM.jpg",
+        alt: "Personal wellness and training session"
     }
 ];

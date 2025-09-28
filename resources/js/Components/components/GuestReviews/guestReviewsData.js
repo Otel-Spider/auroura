@@ -9,7 +9,7 @@ export const guestReviewsData = {
     },
     pageSize: 3,
     theme: {
-        accent: "#a89052",
+        accent: "#d1bb4f",
         heading: "#0f1d35",
         text: "#111321",
         muted: "#6f7380",

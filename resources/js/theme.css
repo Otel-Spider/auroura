@@ -8,8 +8,12 @@
     --bg-620: #223153; /* card border */
     --text: #e5e7eb; /* primary text */
     --muted: #94a3b8; /* secondary text */
-    --primary: #22d3ee; /* cyan */
-    --accent: #7c3aed; /* purple */
+    --primary: #d1bb4f; /* base color - gold */
+    --accent: #d1bb4f; /* accent color - same as primary */
+    --secondary: #333333; /* secondary color */
+    --secondary-light: #666666; /* secondary light */
+    --secondary-lighter: #999999; /* secondary lighter */
+    --secondary-lightest: #cccccc; /* secondary lightest */
     --success: #22c55e;
     --warning: #f59e0b;
     --danger: #ef4444;
@@ -95,11 +99,24 @@ body {
 .topbar {
     background: var(--bg-850);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 1rem 1.5rem;
+    padding: 0.5rem 1.5rem;
     position: sticky;
     top: 0;
     z-index: 999;
     margin-left: 260px;
+    transition: margin-left 0.3s ease;
+}
+
+/* When sidebar is collapsed, expand topbar */
+.sidebar.collapsed ~ .topbar,
+.sidebar-collapsed .topbar {
+    margin-left: 60px;
+}
+
+/* When sidebar is collapsed, expand main content */
+.sidebar.collapsed ~ .main-content,
+.sidebar-collapsed .main-content {
+    margin-left: 60px;
 }
 
 .topbar-search {
@@ -141,6 +158,14 @@ body {
     margin-left: 260px;
     padding: 2rem;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content .container-fluid {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Card Styles */

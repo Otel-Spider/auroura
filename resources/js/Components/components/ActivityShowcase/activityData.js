@@ -1,6 +1,6 @@
 export const activityData = {
-    title: "What's your game plan?",
-    description: "Discover endless adventures and activities designed to create unforgettable memories.\n\nFrom thrilling water sports to relaxing spa treatments, our resort offers something for every guest.\n\nWhether you're seeking adventure or tranquility, we have the perfect activities to match your mood and create lasting experiences.",
+    title: "Ready for adventure beyond the beach?",
+    description: "From tennis and beach volleyball to diving, snorkeling, and water sports, Aurora Oriental Resort offers endless ways to stay active. Whether you prefer land or sea, every activity is designed to bring fun, energy, and unforgettable moments to your Red Sea escape.",
     images: [
         {
             src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=450&fit=crop",

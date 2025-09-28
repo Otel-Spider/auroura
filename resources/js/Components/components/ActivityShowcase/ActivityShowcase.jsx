@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import "../../assets/css/home/activity-showcase.css";
 
 const ActivityShowcase = ({
-  title = "What's your game plan?",
+  title = "Ready for adventure beyond the beach?",
   description = "Discover endless adventures and activities designed to create unforgettable memories.\n\nFrom thrilling water sports to relaxing spa treatments, our resort offers something for every guest.\n\nWhether you're seeking adventure or tranquility, we have the perfect activities to match your mood and create lasting experiences.",
   images = [],
   onOpenGallery
@@ -23,11 +23,11 @@ const ActivityShowcase = ({
     // Get the original number of slides (without loop duplicates)
     const originalSlides = images.length;
     const currentIndex = s.realIndex; // Use realIndex for loop mode
-    
+
     // Calculate progress ratio based on original slides
     const maxIndex = Math.max(0, originalSlides - 1);
     const progressRatio = maxIndex > 0 ? currentIndex / maxIndex : 0;
-    
+
     return {
       currentIndex,
       progressRatio,
@@ -97,15 +97,15 @@ const ActivityShowcase = ({
               >
                 {images.map((img, index) => (
                   <SwiperSlide key={index} className="activity-slide">
-                    <button 
-                      className="activity-image" 
-                      onClick={() => handleOpenLightbox(index)} 
+                    <button
+                      className="activity-image"
+                      onClick={() => handleOpenLightbox(index)}
                       aria-label={`Open image ${index+1}`}
                     >
-                      <img 
-                        src={img.src} 
-                        alt={img.alt || `Activity image ${index + 1}`} 
-                        loading="lazy" 
+                      <img
+                        src={img.src}
+                        alt={img.alt || `Activity image ${index + 1}`}
+                        loading="lazy"
                       />
                     </button>
                   </SwiperSlide>
@@ -132,8 +132,8 @@ const ActivityShowcase = ({
                   className="activity-progress"
                   style={{ "--as-pages": pages, "--as-page": page }}
                 />
-                <button 
-                  className="activity-view-gallery" 
+                <button
+                  className="activity-view-gallery"
                   onClick={() => handleOpenLightbox(activeIndex)}
                 >
                   VIEW GALLERY →
@@ -143,8 +143,8 @@ const ActivityShowcase = ({
               {/* Mobile navigation - pill style */}
               <div className="activity-mobile-nav d-lg-none">
                 <div className="activity-nav-pill">
-                  <button 
-                    className="activity-mobile-arrow activity-prev" 
+                  <button
+                    className="activity-mobile-arrow activity-prev"
                     aria-label="Previous"
                     onClick={() => swiper?.slidePrev()}
                   >
@@ -152,8 +152,8 @@ const ActivityShowcase = ({
                       <path d="M10.5 3.5 6 8l4.5 4.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </button>
-                  <button 
-                    className="activity-mobile-arrow activity-next" 
+                  <button
+                    className="activity-mobile-arrow activity-next"
                     aria-label="Next"
                     onClick={() => swiper?.slideNext()}
                   >
@@ -170,7 +170,7 @@ const ActivityShowcase = ({
           <div className="col-lg-5">
             <div className="activity-content">
               <h2 className="activity-title">{title}</h2>
-              
+
               <div className="activity-description">
                 {paragraphs.map((paragraph, index) => (
                   <p key={index}>
@@ -182,7 +182,7 @@ const ActivityShowcase = ({
           </div>
         </div>
       </div>
-      
+
       {/* Lightbox */}
       {isLightboxOpen && (
         <Lightbox

@@ -1,580 +1,657 @@
 /* Design Tokens */
 :root {
-  --vss-navy-1: #0b1031;
-  --vss-navy-2: #0b1138;
-  --vss-navy-3: #0b0f2e;
-  --vss-gold: #c9a96e;
-  --vss-light: #eae2c6;
-  --vss-muted: rgba(234, 226, 198, 0.45);
-  --vss-border: rgba(234, 226, 198, 0.4);
-  --vss-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  --vss-transition: 480ms ease;
+    --vss-navy-1: #333333;
+    --vss-navy-2: #333333;
+    --vss-navy-3: #333333;
+    --vss-gold: #d1bb4f;
+    --vss-light: #eae2c6;
+    --vss-muted: rgba(234, 226, 198, 0.45);
+    --vss-border: rgba(234, 226, 198, 0.4);
+    --vss-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --vss-transition: 480ms ease;
 }
 
 /* Main Section */
 .vertical-spotlight-slider {
-  position: relative;
-  min-height: 70vh;
-  overflow: hidden;
-  outline: none;
+    position: relative;
+    min-height: 70vh;
+    overflow: hidden;
+    outline: none;
 }
 
 .vss-background {
-  position: relative;
-  min-height: 70vh;
-  background: radial-gradient(
-    100% 100% at 50% 0%,
-    var(--vss-navy-1) 0%,
-    var(--vss-navy-2) 50%,
-    var(--vss-navy-3) 100%
-  );
-  padding: 2rem 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+    position: relative;
+    min-height: 70vh;
+    background: var(--vss-navy-1);
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* Header */
 .vss-header {
-  text-align: center;
-  margin-bottom: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
 .vss-eyebrow {
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--vss-gold);
-  margin-bottom: 1rem;
-  opacity: 0.9;
-  text-align: left;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--vss-gold);
+    margin-bottom: 1rem;
+    opacity: 0.9;
+    text-align: left;
 }
 
 .vss-heading {
-  font-family: "Georgia", "Times New Roman", serif;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 400;
-  line-height: 1.2;
-  color: var(--vss-light);
-  margin: 0;
-  text-align: left;
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--vss-light);
+    margin: 0;
+    text-align: left;
 }
 
 /* Content */
 .vss-content {
-  flex: 1;
-  display: flex;
-  align-items: center;
+    flex: 1;
+    display: flex;
+    align-items: center;
 }
 
 /* Left Controls */
 .vss-controls {
-  display: flex;
-  flex-direction: column;
-  background: rgba(11, 16, 49, 0.6);
-  border: 1px solid var(--vss-border);
-  border-radius: 999px;
-  padding: 0;
-  backdrop-filter: blur(10px);
-  box-shadow: var(--vss-shadow);
-  overflow: hidden;
-  transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    background: rgba(11, 16, 49, 0.6);
+    border: 1px solid var(--vss-border);
+    border-radius: 999px;
+    padding: 0;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--vss-shadow);
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .vss-controls:hover {
-  border-color: var(--vss-gold);
-  box-shadow: 0 0 20px rgba(201, 169, 110, 0.3);
+    border-color: var(--vss-gold);
+    box-shadow: 0 0 20px rgba(209, 187, 79, 0.3);
 }
 
 .vss-control {
-  width: 42px;
-  height: 42px;
-  border: none;
-  background: transparent;
-  color: var(--vss-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  position: relative;
+    width: 42px;
+    height: 42px;
+    border: none;
+    background: transparent;
+    color: var(--vss-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
 }
 
 .vss-control:hover {
-  background: rgba(201, 169, 110, 0.1);
-  color: var(--vss-gold);
+    background: rgba(209, 187, 79, 0.1);
+    color: var(--vss-gold);
 }
 
 .vss-control:active {
-  background: rgba(201, 169, 110, 0.2);
+    background: rgba(209, 187, 79, 0.2);
 }
 
 .vss-control:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .vss-control:focus-visible {
-  outline: 2px solid var(--vss-gold);
-  outline-offset: 2px;
+    outline: 2px solid var(--vss-gold);
+    outline-offset: 2px;
 }
 
 .vss-control-up {
-  border-bottom: 1px solid var(--vss-border);
+    border-bottom: 1px solid var(--vss-border);
 }
 
 /* Image Container */
 .vss-image-container {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16/10;
-  perspective: 1000px;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    perspective: 1000px;
 }
 
 .vss-image {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: var(--vss-shadow);
-  transition: opacity var(--vss-transition), transform var(--vss-transition);
-  background: rgba(234, 226, 198, 0.1);
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--vss-shadow);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: rgba(234, 226, 198, 0.1);
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 
 .vss-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transition: transform var(--vss-transition);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform, opacity;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    contain: layout style paint;
+    content-visibility: auto;
+    image-orientation: from-image;
 }
 
-.vss-image-animating {
-  opacity: 0.7;
-  transform: translateX(-30px);
+/* Current image state */
+.vss-image-current {
+    opacity: 1;
+    transform: translateX(0);
 }
 
-.vss-image-animating img {
-  transform: scale(1.02);
+/* Fade from left to right */
+.vss-image-fade-right {
+    animation: fadeInFromLeft 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Fade from right to left */
+.vss-image-fade-left {
+    animation: fadeInFromRight 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* Text Stack */
 .vss-text-stack {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 0;
-  cursor: pointer;
-  user-select: none;
-  height: 60vh;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  pointer-events: auto;
-  z-index: 10;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    cursor: pointer;
+    user-select: none;
+    height: 60vh;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    pointer-events: auto;
+    z-index: 10;
 }
 
 .vss-text-item {
-  transition: all var(--vss-transition);
-  padding: 0.5rem 0;
-  border-radius: 8px;
-  position: absolute;
-  width: 100%;
-  transform-origin: center;
-  text-align: center;
+    transition: all var(--vss-transition);
+    padding: 0.5rem 0;
+    border-radius: 8px;
+    position: absolute;
+    width: 100%;
+    transform-origin: center;
+    text-align: center;
 }
 
 /* Active Text (Spotlight) */
 .vss-text-active {
-  opacity: 1;
-  filter: blur(0);
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%) scale(1);
+    opacity: 1;
+    filter: blur(0);
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scale(1);
 }
 
 .vss-text-active .vss-text-title {
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  color: var(--vss-light);
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    color: var(--vss-light);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .vss-text-active .vss-text-description {
-  opacity: 1;
-  color: var(--vss-light);
-  animation: fadeInUp 0.6s ease-out 0.2s both;
+    opacity: 1;
+    color: var(--vss-light);
+    animation: fadeInUp 0.6s ease-out 0.2s both;
 }
 
 /* Inactive Text */
 .vss-text-inactive {
-  opacity: 0.4;
-  filter: blur(2px);
-  left: 0;
-  top: 50%;
+    opacity: 0.4;
+    filter: blur(2px);
+    left: 0;
+    top: 50%;
 }
 
 .vss-text-inactive .vss-text-title {
-  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-  color: var(--vss-muted);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    color: var(--vss-muted);
 }
 
 .vss-text-inactive .vss-text-description {
-  display: none;
+    display: none;
 }
 
 /* Text Typography */
 .vss-text-title {
-  font-family: "Georgia", "Times New Roman", serif;
-  font-weight: 500;
-  line-height: 1.2;
-  margin: 0 0 0.5rem 0;
-  transition: all var(--vss-transition);
-  text-align: center;
+    font-family: "Georgia", "Times New Roman", serif;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0 0 0.5rem 0;
+    transition: all var(--vss-transition);
+    text-align: center;
 }
 
 .vss-text-description {
-  font-size: 1rem;
-  line-height: 1.5;
-  margin: 0;
-  transition: all var(--vss-transition);
-  max-width: 400px;
-  text-align: center;
-  margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+    transition: all var(--vss-transition);
+    max-width: 450px;
+    text-align: center;
+    margin: 0 auto;
 }
 
 /* Mobile Layout */
 .vss-mobile-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .vss-mobile-image {
-  width: 100%;
-  aspect-ratio: 16/10;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: var(--vss-shadow);
-  background: rgba(234, 226, 198, 0.1);
+    width: 100%;
+    aspect-ratio: 16/10;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--vss-shadow);
+    background: rgba(234, 226, 198, 0.1);
 }
 
 .vss-mobile-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    will-change: transform, opacity;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    contain: layout style paint;
+    content-visibility: auto;
+    image-orientation: from-image;
 }
 
 .vss-mobile-text-loop {
-  position: relative;
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+    position: relative;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .vss-mobile-text-item {
-  position: absolute;
-  width: 100%;
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 0;
-  transform: translateY(20px) scale(0.9);
-  pointer-events: none;
+    position: absolute;
+    width: 100%;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    pointer-events: none;
 }
 
 .vss-mobile-text-active {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
 }
 
 .vss-mobile-text-inactive {
-  opacity: 0;
-  transform: translateY(20px) scale(0.9);
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
 }
 
 .vss-mobile-title {
-  font-family: var(--vss-heading-font);
-  font-size: clamp(1.2rem, 4vw, 1.6rem);
-  font-weight: 600;
-  color: var(--vss-light);
-  margin-bottom: 0.75rem;
-  line-height: 1.3;
+    font-family: var(--vss-heading-font);
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
+    font-weight: 600;
+    color: var(--vss-light);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
 }
 
 .vss-mobile-description {
-  font-size: 0.95rem;
-  color: var(--vss-light);
-  line-height: 1.5;
-  margin: 0;
-  max-width: 90%;
-  margin: 0 auto;
+    font-size: 1.05rem;
+    color: var(--vss-light);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 90%;
+    margin: 0 auto;
 }
 
 .vss-progress {
-  width: 100%;
-  max-width: 300px;
-  height: 4px;
-  background: var(--vss-track);
-  border-radius: 999px;
-  position: relative;
-  overflow: hidden;
-  margin: 0 auto;
+    width: 100%;
+    max-width: 300px;
+    height: 4px;
+    background: var(--vss-track);
+    border-radius: 999px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
 }
 
 .vss-progress::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 100%;
-  background: var(--vss-accent);
-  border-radius: 999px;
-  transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  left: calc(var(--vss-page, 0) * (100% - 40px));
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 100%;
+    background: var(--vss-accent);
+    border-radius: 999px;
+    transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    left: calc(var(--vss-page, 0) * (100% - 40px));
 }
 
 .vss-mobile-controls {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 .vss-mobile-control {
-  width: 48px;
-  height: 48px;
-  border: 1px solid var(--vss-border);
-  background: rgba(11, 16, 49, 0.6);
-  color: var(--vss-light);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  box-shadow: var(--vss-shadow);
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--vss-border);
+    background: rgba(11, 16, 49, 0.6);
+    color: var(--vss-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--vss-shadow);
 }
 
 .vss-mobile-control:hover:not(:disabled) {
-  background: rgba(11, 16, 49, 0.8);
-  border-color: var(--vss-accent);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    background: rgba(11, 16, 49, 0.8);
+    border-color: var(--vss-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .vss-mobile-control:active:not(:disabled) {
-  transform: translateY(0);
+    transform: translateY(0);
 }
 
 .vss-mobile-control:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .vss-mobile-control svg {
-  width: 16px;
-  height: 16px;
+    width: 16px;
+    height: 16px;
 }
 
 /* Responsive Design */
 @media (max-width: 1199.98px) {
-  .vss-background {
-    padding: 1.5rem 0;
-  }
+    .vss-background {
+        padding: 1.5rem 0;
+    }
 
-  .vss-header {
-    margin-bottom: 1.5rem;
-  }
+    .vss-header {
+        margin-bottom: 1.5rem;
+    }
 
-  .vss-heading {
-    font-size: clamp(1.8rem, 4.5vw, 3rem);
-  }
+    .vss-heading {
+        font-size: clamp(1.8rem, 4.5vw, 3rem);
+    }
 
-  .vss-text-stack {
-    gap: 2rem;
-  }
+    .vss-text-stack {
+        gap: 2rem;
+    }
 
-  .vss-text-active .vss-text-title {
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-  }
+    .vss-text-active .vss-text-title {
+        font-size: clamp(1.6rem, 4vw, 2.4rem);
+    }
 
-  .vss-text-inactive .vss-text-title {
-    font-size: clamp(1.1rem, 3vw, 1.6rem);
-  }
+    .vss-text-inactive .vss-text-title {
+        font-size: clamp(1.1rem, 3vw, 1.6rem);
+    }
 }
 
 @media (max-width: 991.98px) {
-  .vss-background {
-    padding: 1.25rem 0;
-    min-height: auto;
-  }
+    .vss-background {
+        padding: 1.25rem 0;
+        min-height: auto;
+    }
 
-  .vss-header {
-    margin-bottom: 1.25rem;
-  }
+    .vss-header {
+        margin-bottom: 1.25rem;
+    }
 
-  .vss-heading {
-    font-size: clamp(1.6rem, 5vw, 2.5rem);
-  }
+    .vss-heading {
+        font-size: clamp(1.6rem, 5vw, 2.5rem);
+    }
 
-  .vss-controls {
-    flex-direction: row;
-    width: fit-content;
-    margin: 0 auto 2rem auto;
-  }
+    .vss-controls {
+        flex-direction: row;
+        width: fit-content;
+        margin: 0 auto 2rem auto;
+    }
 
-  .vss-control {
-    width: 48px;
-    height: 36px;
-  }
+    .vss-control {
+        width: 48px;
+        height: 36px;
+    }
 
-  .vss-control-up {
-    border-bottom: none;
-    border-right: 1px solid var(--vss-border);
-  }
+    .vss-control-up {
+        border-bottom: none;
+        border-right: 1px solid var(--vss-border);
+    }
 
-  .vss-text-active .vss-text-title {
-    font-size: clamp(1.4rem, 5vw, 2rem);
-  }
+    .vss-text-active .vss-text-title {
+        font-size: clamp(1.4rem, 5vw, 2rem);
+    }
 
-  .vss-text-inactive .vss-text-title {
-    font-size: clamp(1rem, 4vw, 1.4rem);
-  }
+    .vss-text-inactive .vss-text-title {
+        font-size: clamp(1rem, 4vw, 1.4rem);
+    }
 
-  .vss-text-description {
-    font-size: 0.95rem;
-  }
+    .vss-text-description {
+        font-size: 0.95rem;
+    }
 }
 
 @media (max-width: 767.98px) {
-  .vss-background {
-    padding: 1rem 0;
-  }
+    .vss-background {
+        padding: 1rem 0;
+    }
 
-  .vss-header {
-    margin-bottom: 1rem;
-  }
+    .vss-header {
+        margin-bottom: 1rem;
+    }
 
-  .vss-eyebrow {
-    font-size: 0.75rem;
-    margin-bottom: 0.75rem;
-  }
+    .vss-eyebrow {
+        font-size: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
 
-  .vss-heading {
-    font-size: clamp(1.4rem, 6vw, 2rem);
-  }
+    .vss-heading {
+        font-size: clamp(1.4rem, 6vw, 2rem);
+    }
 
-  .vss-content .row {
-    flex-direction: column;
-  }
+    .vss-content .row {
+        flex-direction: column;
+    }
 
-  .vss-controls {
-    margin-bottom: 1.5rem;
-    order: 3;
-  }
+    .vss-controls {
+        margin-bottom: 1.5rem;
+        order: 3;
+    }
 
-  .vss-control {
-    width: 44px;
-    height: 32px;
-  }
+    .vss-control {
+        width: 44px;
+        height: 32px;
+    }
 
-  .vss-image-container {
-    margin-bottom: 1.5rem;
-    aspect-ratio: 4/3;
-    order: 1;
-  }
+    .vss-image-container {
+        margin-bottom: 1.5rem;
+        aspect-ratio: 4/3;
+        order: 1;
+    }
 
-  .vss-text-stack {
-    padding: 0.25rem 0;
-    height: 40vh;
-    order: 2;
-  }
+    .vss-text-stack {
+        padding: 0.25rem 0;
+        height: 40vh;
+        order: 2;
+    }
 
-  .vss-text-active .vss-text-title {
-    font-size: clamp(1.2rem, 6vw, 1.6rem);
-  }
+    .vss-text-active .vss-text-title {
+        font-size: clamp(1.2rem, 6vw, 1.6rem);
+    }
 
-  .vss-text-inactive {
-    opacity: 0.6;
-    filter: blur(1px);
-    transform: translateY(0) scale(0.97);
-  }
+    .vss-text-inactive {
+        opacity: 0.6;
+        filter: blur(1px);
+        transform: translateY(0) scale(0.97);
+    }
 
-  .vss-text-inactive .vss-text-title {
-    font-size: clamp(0.95rem, 5vw, 1.2rem);
-  }
+    .vss-text-inactive .vss-text-title {
+        font-size: clamp(0.95rem, 5vw, 1.2rem);
+    }
 
-  .vss-text-description {
-    font-size: 0.9rem;
-    line-height: 1.4;
-  }
+    .vss-text-description {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
 }
 
 @media (max-width: 575.98px) {
-  .vss-background {
-    padding: 0.75rem 0;
-  }
+    .vss-background {
+        padding: 0.75rem 0;
+    }
 
-  .vss-header {
-    margin-bottom: 0.75rem;
-  }
+    .vss-header {
+        margin-bottom: 0.75rem;
+    }
 
-  .vss-heading {
-    font-size: clamp(1.2rem, 7vw, 1.8rem);
-  }
+    .vss-heading {
+        font-size: clamp(1.2rem, 7vw, 1.8rem);
+    }
 
-  .vss-text-stack {
-    height: 35vh;
-  }
+    .vss-text-stack {
+        height: 35vh;
+    }
 
-  .vss-text-active .vss-text-title {
-    font-size: clamp(1.1rem, 7vw, 1.4rem);
-  }
+    .vss-text-active .vss-text-title {
+        font-size: clamp(1.1rem, 7vw, 1.4rem);
+    }
 
-  .vss-text-inactive .vss-text-title {
-    font-size: clamp(0.9rem, 6vw, 1.1rem);
-  }
+    .vss-text-inactive .vss-text-title {
+        font-size: clamp(0.9rem, 6vw, 1.1rem);
+    }
 
-  .vss-text-description {
-    font-size: 0.85rem;
-  }
+    .vss-text-description {
+        font-size: 0.85rem;
+    }
 }
 
 /* Animation keyframes */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.vss-image {
-  animation: fadeInUp 0.6s ease-out;
+/* Fade from left to right animation */
+@keyframes fadeInFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-80px) scale(0.95);
+    }
+    20% {
+        opacity: 0.2;
+        transform: translateX(-60px) scale(0.97);
+    }
+    40% {
+        opacity: 0.4;
+        transform: translateX(-40px) scale(0.98);
+    }
+    60% {
+        opacity: 0.6;
+        transform: translateX(-20px) scale(0.99);
+    }
+    80% {
+        opacity: 0.8;
+        transform: translateX(-10px) scale(0.995);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
 }
+
+/* Fade from right to left animation */
+@keyframes fadeInFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(80px) scale(0.95);
+    }
+    20% {
+        opacity: 0.2;
+        transform: translateX(60px) scale(0.97);
+    }
+    40% {
+        opacity: 0.4;
+        transform: translateX(40px) scale(0.98);
+    }
+    60% {
+        opacity: 0.6;
+        transform: translateX(20px) scale(0.99);
+    }
+    80% {
+        opacity: 0.8;
+        transform: translateX(10px) scale(0.995);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+/* Base image animation removed - using specific fade animations instead */
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
-  .vss-background {
-    background: #000;
-  }
+    .vss-background {
+        background: #000;
+    }
 
-  .vss-light,
-  .vss-text-active .vss-text-title {
-    color: #fff;
-  }
+    .vss-light,
+    .vss-text-active .vss-text-title {
+        color: #fff;
+    }
 
-  .vss-controls {
-    border-color: #fff;
-  }
+    .vss-controls {
+        border-color: #fff;
+    }
 }

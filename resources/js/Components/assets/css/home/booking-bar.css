@@ -4,12 +4,12 @@
     --bk-cream-border: #e7e0d4;
     --bk-text: #111321;
     --bk-muted: #6b6f7b;
-    --bk-gold: #7e6936;
-    --bk-gold-dark: #5f4f2a;
+    --bk-gold: #d1bb4f;
+    --bk-gold-dark: #b8a542;
     --bk-serif: "Georgia", "Times New Roman", serif;
 
     /* Round button tokens */
-    --bb-gold: #7e6936;
+    --bb-gold: #d1bb4f;
     --bb-gold-ink: #fff;
     --bb-muted: #d6d0c5;
     --bb-muted-ink: #6f6b64;
@@ -445,6 +445,7 @@
 .counter-value {
     min-width: 1.5rem;
     text-align: center;
+    color: var(--bb-text);
     font-weight: 600;
 }
 
@@ -706,7 +707,7 @@
 }
 
 .header-container {
-    max-width: 1200px !important;
+    max-width: 1500px !important;
     margin: 0 auto !important;
     padding: 0 2rem !important;
     display: flex !important;

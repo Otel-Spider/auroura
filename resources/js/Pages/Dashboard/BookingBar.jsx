@@ -6,6 +6,7 @@ import * as RiIcons from 'react-icons/ri';
 import axios from 'axios';
 import Sidebar from '../../components/shared/Sidebar';
 import Topbar from '../../components/shared/Topbar';
+import DashboardFooter from '../../components/shared/DashboardFooter';
 import { getCSRFToken } from '../../utils/csrf';
 import { toast } from 'react-toastify';
 
@@ -13,6 +14,9 @@ export default function BookingBar({ auth }) {
   const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
   const [saving, setSaving] = React.useState(false);
+  const [hasChanges, setHasChanges] = React.useState(false);
+  const [isPublished, setIsPublished] = React.useState(true);
+  const [originalData, setOriginalData] = React.useState(null);
   const [bookingBarData, setBookingBarData] = React.useState({
     title: '',
     dateLabel: '',
@@ -46,6 +50,7 @@ export default function BookingBar({ auth }) {
         };
 
         setBookingBarData(convertedData);
+        setOriginalData(JSON.parse(JSON.stringify(convertedData)));
       } catch (err) {
         console.error('Error fetching booking bar data:', err);
         toast.error('Failed to load booking bar data');
@@ -56,6 +61,14 @@ export default function BookingBar({ auth }) {
 
     fetchBookingBarData();
   }, []);
+
+  // Track changes
+  React.useEffect(() => {
+    if (originalData && bookingBarData) {
+      const hasChanged = JSON.stringify(originalData) !== JSON.stringify(bookingBarData);
+      setHasChanges(hasChanged);
+    }
+  }, [bookingBarData, originalData]);
 
   const toggleSidebar = () => {
     setSidebarCollapsed(!sidebarCollapsed);
@@ -85,6 +98,8 @@ export default function BookingBar({ auth }) {
         }
       });
 
+      setOriginalData(JSON.parse(JSON.stringify(bookingBarData)));
+      setHasChanges(false);
       console.log('Booking bar data saved:', response.data);
       toast.success('Booking bar settings saved successfully!');
     } catch (err) {
@@ -95,9 +110,47 @@ export default function BookingBar({ auth }) {
     }
   };
 
+  const handlePublish = async () => {
+    try {
+      setSaving(true);
+      const csrfToken = getCSRFToken();
+      if (!csrfToken) {
+        toast.error('CSRF token not available. Please refresh the page.');
+        return;
+      }
+
+      const response = await axios.put('/api/booking-bar/update', { ...bookingBarData, published: true }, {
+        headers: {
+          'X-CSRF-TOKEN': csrfToken,
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'application/json',
+        }
+      });
+
+      setIsPublished(true);
+      setOriginalData(JSON.parse(JSON.stringify({ ...bookingBarData, published: true })));
+      setHasChanges(false);
+      console.log('Booking bar data published:', response.data);
+      toast.success('Booking bar settings published successfully!');
+    } catch (err) {
+      console.error('Error publishing booking bar data:', err);
+      toast.error('Failed to publish booking bar data: ' + (err.response?.data?.message || err.message));
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleUndo = () => {
+    if (originalData) {
+      setBookingBarData(originalData);
+      setHasChanges(false);
+      toast.info('Changes reverted to last saved version');
+    }
+  };
+
   return (
     <>
-      <Head title="Booking Bar - Dashboard" />
+      <Head title="Booking Bar" />
       <div className={`App ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
         <Sidebar isCollapsed={sidebarCollapsed} onToggle={toggleSidebar} />
         <Topbar onToggleSidebar={toggleSidebar} auth={auth} />
@@ -127,28 +180,54 @@ export default function BookingBar({ auth }) {
               <Col xs={12}>
                 <div className="d-flex justify-content-between align-items-center">
                   <div>
-                    <h2 className="text-white mb-1">Booking Bar Settings</h2>
-                    <p className="text-muted mb-0">Control the text content of the booking bar component</p>
+                    <h4 className="text-white mb-1">Booking Bar Settings</h4>
+                    <p className="text-muted mb-0 small">Control the text content of the booking bar component</p>
                   </div>
-                  <Button
-                    variant="primary"
-                    onClick={handleSave}
-                    disabled={!auth?.user || saving}
-                  >
-                    {saving ? (
-                      <>
-                        <div className="spinner-border spinner-border-sm me-2" role="status">
-                          <span className="visually-hidden">Loading...</span>
-                        </div>
-                        Saving...
-                      </>
-                    ) : (
-                      <>
-                        <RiIcons.RiSaveLine size={16} className="me-2" />
-                        Save Changes
-                      </>
+                  <div className="gap-2 d-flex">
+                    {hasChanges && (
+                      <Button
+                        variant="outline-warning"
+                        size="sm"
+                        onClick={handleUndo}
+                        disabled={saving || !auth?.user}
+                        className="d-flex align-items-center"
+                      >
+                        <RiIcons.RiArrowGoBackLine size={16} className="me-1" />
+                        Undo
+                      </Button>
                     )}
-                  </Button>
+                    <Button
+                      variant="outline-primary"
+                      size="sm"
+                      onClick={handleSave}
+                      disabled={!auth?.user || saving || !hasChanges}
+                      className="d-flex align-items-center"
+                    >
+                      {saving ? (
+                        <>
+                          <div className="spinner-border spinner-border-sm me-1" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                          </div>
+                          Saving...
+                        </>
+                      ) : (
+                        <>
+                          <RiIcons.RiSaveLine size={16} className="me-1" />
+                          Save Changes
+                        </>
+                      )}
+                    </Button>
+                    <Button
+                      variant="success"
+                      size="sm"
+                      onClick={handlePublish}
+                      disabled={saving || !auth?.user}
+                      className="d-flex align-items-center"
+                    >
+                      <RiIcons.RiGlobalLine size={16} className="me-1" />
+                      Publish
+                    </Button>
+                  </div>
                 </div>
               </Col>
             </Row>
@@ -170,22 +249,23 @@ export default function BookingBar({ auth }) {
               <Card.Header>
                 <h6 className="mb-0 text-white">Booking Bar Content</h6>
               </Card.Header>
-              <Card.Body>
+              <Card.Body className="p-3">
                 {loading ? (
-                  <div className="py-4 text-center">
-                    <div className="spinner-border text-primary" role="status">
+                  <div className="py-3 text-center">
+                    <div className="spinner-border spinner-border-sm text-primary" role="status">
                       <span className="visually-hidden">Loading...</span>
                     </div>
-                    <p className="text-muted mt-2">Loading booking bar settings...</p>
+                    <p className="text-muted mt-2 mb-0 small">Loading booking bar settings...</p>
                   </div>
                 ) : (
                   <Form>
                     <Row>
                       <Col md={12}>
-                        <Form.Group className="mb-3">
-                          <Form.Label className="text-white">Main Title</Form.Label>
+                        <Form.Group className="mb-2">
+                          <Form.Label className="text-white small">Main Title</Form.Label>
                           <Form.Control
                             type="text"
+                            size="sm"
                             placeholder="Book your next ALL Inclusive Collection experience"
                             value={bookingBarData.title}
                             onChange={(e) => handleInputChange('title', e.target.value)}
@@ -307,6 +387,7 @@ export default function BookingBar({ auth }) {
               </Card.Body>
             </Card>
           </Container>
+          <DashboardFooter />
         </div>
       </div>
     </>

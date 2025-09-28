@@ -26,7 +26,7 @@ Route::get('/sanctum/csrf-cookie', function () {
     return response()->json([
         'message' => 'CSRF cookie set',
         'token' => csrf_token()
-    ]);
+    ])->withCookie(cookie('XSRF-TOKEN', csrf_token(), 120, '/', null, false, true));
 });
 
 // Debug route to test CSRF token
@@ -80,6 +80,7 @@ Route::middleware('auth')->group(function () {
             Route::put('/api/gallery/update', [GalleryController::class, 'update']);
             Route::post('/api/gallery/upload-image', [GalleryController::class, 'uploadImage']);
             Route::delete('/api/gallery/delete-image', [GalleryController::class, 'deleteImage']);
+            Route::put('/api/gallery/rename-image', [GalleryController::class, 'renameImage']);
 });
 
 // Public routes (no auth required)

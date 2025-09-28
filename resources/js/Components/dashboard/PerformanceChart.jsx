@@ -27,21 +27,21 @@ const PerformanceChart = ({ data, stats }) => {
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: "rgba(16,21,32,.96)",
+        backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--bg-750').trim() || "rgba(31,36,41,.96)",
         borderColor: "rgba(255,255,255,.08)",
         borderWidth: 1,
-        titleColor: "#e6e9ef",
-        bodyColor: "#cfd6e6",
+        titleColor: getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || "#e6e9ef",
+        bodyColor: getComputedStyle(document.documentElement).getPropertyValue('--muted').trim() || "#cfd6e6",
       },
     },
     scales: {
       x: {
         grid: { color: "rgba(255,255,255,.06)", drawBorder: false },
-        ticks: { color: "#9aa8bf", font: { size: 11 } },
+        ticks: { color: getComputedStyle(document.documentElement).getPropertyValue('--muted').trim() || "#9aa8bf", font: { size: 10 } },
       },
       y: {
         grid: { color: "rgba(255,255,255,.06)", drawBorder: false },
-        ticks: { color: "#9aa8bf", font: { size: 11 } },
+        ticks: { color: getComputedStyle(document.documentElement).getPropertyValue('--muted').trim() || "#9aa8bf", font: { size: 10 } },
       },
     },
   };
@@ -55,21 +55,21 @@ const PerformanceChart = ({ data, stats }) => {
         data: data.datasets[0].data,
         backgroundColor: '#3b82f6', // blue
         borderRadius: 6,
-        barThickness: 22
+        barThickness: 11
       },
       {
         label: 'Sales',
         data: data.datasets[1].data,
         backgroundColor: '#10b981', // green
         borderRadius: 6,
-        barThickness: 22
+        barThickness: 11
       },
       {
         label: 'Conversion',
         data: data.datasets[2].data,
         backgroundColor: '#f59e0b', // orange
         borderRadius: 6,
-        barThickness: 22
+        barThickness: 11
       },
     ]
   };

@@ -69,7 +69,7 @@ export default function Facilities({ titleLines, items, defaultVisible = 12 }) {
                 aria-controls="facilities-list"
                 onClick={() => setExpanded((v) => !v)}
               >
-                {expanded ? "SHOW LESS FACILITIES" : "SHOW MORE FACILITIES"}
+                {expanded ? "SHOW LESS FACILITIES" : "Explore All Facilities"}
                 <svg className="chev" width="14" height="14" viewBox="0 0 24 24">
                   <path
                     d="M6 9l6 6 6-6"

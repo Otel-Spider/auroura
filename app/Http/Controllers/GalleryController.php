@@ -123,7 +123,7 @@ class GalleryController extends Controller
     {
         try {
             $validated = $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:10240', // Increased from 2048KB to 10240KB (10MB)
                 'alt' => 'required|string|max:255',
                 'name' => 'required|string|max:255|regex:/^[a-zA-Z0-9_-]+$/'
             ]);
@@ -136,8 +136,42 @@ class GalleryController extends Controller
             $extension = $image->getClientOriginalExtension();
             $filename = $name . '.' . $extension;
 
-            // Store image
-            $path = $image->storeAs('public/gallery', $filename);
+            // Optimize image quality (maintain high quality)
+            if (in_array($extension, ['jpg', 'jpeg'])) {
+                // For JPEG images, maintain high quality (90%)
+                $imageResource = imagecreatefromjpeg($image->getPathname());
+                if ($imageResource) {
+                    $optimizedPath = storage_path('app/public/gallery/' . $filename);
+                    // Create directory if it doesn't exist
+                    if (!file_exists(dirname($optimizedPath))) {
+                        mkdir(dirname($optimizedPath), 0755, true);
+                    }
+                    imagejpeg($imageResource, $optimizedPath, 90); // 90% quality
+                    imagedestroy($imageResource);
+                } else {
+                    // Fallback to original storage method
+                    $path = $image->storeAs('public/gallery', $filename);
+                }
+            } elseif (in_array($extension, ['png'])) {
+                // For PNG images, maintain high quality (no compression)
+                $imageResource = imagecreatefrompng($image->getPathname());
+                if ($imageResource) {
+                    $optimizedPath = storage_path('app/public/gallery/' . $filename);
+                    // Create directory if it doesn't exist
+                    if (!file_exists(dirname($optimizedPath))) {
+                        mkdir(dirname($optimizedPath), 0755, true);
+                    }
+                    imagepng($imageResource, $optimizedPath, 0); // 0 = no compression
+                    imagedestroy($imageResource);
+                } else {
+                    // Fallback to original storage method
+                    $path = $image->storeAs('public/gallery', $filename);
+                }
+            } else {
+                // For other formats (gif, webp), store as-is
+                $path = $image->storeAs('public/gallery', $filename);
+            }
+
             $imagePath = 'gallery/' . $filename;
 
             return response()->json([
@@ -190,6 +224,70 @@ class GalleryController extends Controller
 
             return response()->json([
                 'message' => 'An error occurred while deleting the image',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Rename gallery image
+     */
+    public function renameImage(Request $request): JsonResponse
+    {
+        try {
+            $validated = $request->validate([
+                'old_path' => 'required|string',
+                'new_name' => 'required|string|max:255|regex:/^[a-zA-Z0-9_-]+$/',
+                'alt' => 'required|string|max:255'
+            ]);
+
+            $oldPath = str_replace('/storage/', '', $validated['old_path']);
+            $newName = $validated['new_name'];
+            $alt = $validated['alt'];
+
+            // Check if old file exists
+            if (!Storage::exists('public/' . $oldPath)) {
+                return response()->json([
+                    'message' => 'Original image not found',
+                    'error' => 'File does not exist'
+                ], 404);
+            }
+
+            // Get file extension from old path
+            $extension = pathinfo($oldPath, PATHINFO_EXTENSION);
+            $newPath = 'gallery/' . $newName . '.' . $extension;
+
+            // Check if new filename already exists
+            if (Storage::exists('public/' . $newPath) && $newPath !== $oldPath) {
+                return response()->json([
+                    'message' => 'A file with this name already exists',
+                    'error' => 'Duplicate filename'
+                ], 409);
+            }
+
+            // Move/rename the file
+            Storage::move('public/' . $oldPath, 'public/' . $newPath);
+
+            return response()->json([
+                'message' => 'Image renamed successfully',
+                'data' => [
+                    'src' => '/storage/' . $newPath,
+                    'alt' => $alt,
+                    'name' => $newName,
+                    'path' => $newPath
+                ]
+            ]);
+
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
+            Log::error('Gallery image rename error: ' . $e->getMessage());
+
+            return response()->json([
+                'message' => 'An error occurred while renaming the image',
                 'error' => $e->getMessage()
             ], 500);
         }

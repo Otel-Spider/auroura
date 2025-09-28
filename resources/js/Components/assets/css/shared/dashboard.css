@@ -1,0 +1,59 @@
+/* Dashboard Animation Styles */
+
+/* Initial state - elements are hidden and positioned */
+.dashboard-row.animate-out,
+.dashboard-col.animate-out,
+.home-section.animate-out {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Animated state - elements slide in and fade in */
+.dashboard-row.animate-in,
+.dashboard-col.animate-in,
+.home-section.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Row animations - slide in from bottom */
+.dashboard-row,
+.home-section {
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Column animations - staggered slide in */
+.dashboard-col {
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .dashboard-row,
+    .dashboard-col,
+    .home-section {
+        animation: none;
+        transition: none;
+    }
+
+    .dashboard-row.animate-out,
+    .dashboard-col.animate-out,
+    .home-section.animate-out,
+    .dashboard-row.animate-in,
+    .dashboard-col.animate-in,
+    .home-section.animate-in {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .dashboard-row,
+    .dashboard-col,
+    .home-section {
+        opacity: 1;
+        transform: none;
+    }
+}

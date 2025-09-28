@@ -1,7 +1,7 @@
 /* Auth page styles */
 .auth-bg {
     min-height: 100vh;
-    background: linear-gradient(135deg, #0e7c74 0%, #139e97 100%);
+    background: rgb(33, 37, 41);
     position: relative;
     display: flex;
     align-items: center;
@@ -28,7 +28,7 @@
 .auth-card {
     width: 100%;
     max-width: 480px;
-    background: rgba(10, 63, 63, 0.55);
+    background: #3a3f44;
     backdrop-filter: blur(8px);
     border-radius: 14px;
     padding: 32px;
@@ -49,9 +49,16 @@
     margin-bottom: 32px;
 }
 
+.auth-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #2fa98c, transparent);
+    margin: 20px 0;
+    opacity: 0.6;
+}
+
 .auth-logo {
-    width: 60px;
-    height: 60px;
+    width: 150px;
     color: #d5f5f2;
     margin: 0 auto 16px;
     display: block;
@@ -59,8 +66,7 @@
 
 @media (max-width: 480px) {
     .auth-logo {
-        width: 56px;
-        height: 56px;
+        width: 80px;
     }
 }
 
@@ -125,8 +131,8 @@
 
 .auth-input:focus {
     outline: none;
-    border-color: #3fe1d4;
-    box-shadow: 0 0 0 3px rgba(63, 225, 212, 0.2);
+    border-color: #2fa98c;
+    box-shadow: 0 0 0 3px rgba(47, 169, 140, 0.2);
     background: rgba(255, 255, 255, 0.08);
 }
 
@@ -141,7 +147,7 @@
 .auth-icon-left {
     position: absolute;
     left: 16px;
-    color: #9ed4d0;
+    color: #2fa98c;
     font-size: 18px;
     z-index: 2;
     pointer-events: none;
@@ -210,14 +216,14 @@
 }
 
 .auth-forgot:hover {
-    color: #3fe1d4;
+    color: #2fa98c;
     text-decoration: underline;
 }
 
 .auth-button {
     width: 100%;
     height: 48px;
-    background: linear-gradient(90deg, #1ba39c, #2cc5bd);
+    background: #3bb8a3;
     border: none;
     border-radius: 10px;
     color: white;
@@ -229,7 +235,7 @@
 }
 
 .auth-button:hover:not(:disabled) {
-    background: linear-gradient(90deg, #1ba39c, #2cc5bd);
+    background: linear-gradient(90deg, #2fa98c, #3bb8a3);
     filter: brightness(1.1);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);

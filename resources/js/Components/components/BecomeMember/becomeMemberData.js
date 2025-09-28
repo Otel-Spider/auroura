@@ -1,6 +1,6 @@
 // Demo data for BecomeMember component
 export const becomeMemberData = {
-    logoSrc: "https://static.wixstatic.com/media/f57497_e724bd3950134b9badbd5bca5b0824b4~mv2.png/v1/fill/w_223,h_80,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20Head%20Office%20Base%20Horizontal%20Transpa.png",
+    logoSrc: "/storage/logo/Logo.png",
     heading: "Become a member",
     intro: "When making a booking at this resort:",
     benefits: [

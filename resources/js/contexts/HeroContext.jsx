@@ -41,9 +41,11 @@ const defaultHeroData = {
 };
 
 export const HeroProvider = ({ children }) => {
-  const [heroData, setHeroData] = useState(defaultHeroData);
+  const [heroData, setHeroData] = useState(null); // Start with null instead of default data
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [publishedData, setPublishedData] = useState(null); // Track published version
+  const [draftData, setDraftData] = useState(null); // Track local draft version
 
   // Load hero data from API on mount
   useEffect(() => {
@@ -68,20 +70,57 @@ export const HeroProvider = ({ children }) => {
         };
 
         setHeroData(convertedData);
+        setPublishedData(convertedData); // Set initial published data
+        setDraftData(convertedData); // Set initial draft data
         setError(null);
       } catch (err) {
         console.error('Error fetching hero data:', err);
         setError('Failed to load hero data');
-        // Keep default data on error
+        // Use default data only when there's an actual error
+        setHeroData(defaultHeroData);
+        setPublishedData(defaultHeroData);
+        setDraftData(defaultHeroData);
       } finally {
         setLoading(false);
       }
     };
 
+    // Load saved draft from localStorage if it exists
+    const loadSavedDraft = () => {
+      try {
+        const savedDraft = localStorage.getItem('hero-draft-data');
+        if (savedDraft) {
+          const draftData = JSON.parse(savedDraft);
+          setDraftData(draftData);
+          console.log('Loaded saved draft from localStorage:', draftData);
+        }
+      } catch (err) {
+        console.warn('Could not load draft from localStorage:', err);
+      }
+    };
+
     fetchHeroData();
+    loadSavedDraft();
   }, []);
 
-  const updateHeroData = async (newData) => {
+  // Save draft locally (no database call)
+  const saveDraftLocally = (newData) => {
+    const updatedData = { ...heroData, ...newData };
+    setDraftData(JSON.parse(JSON.stringify(updatedData)));
+
+    // Save to localStorage for persistence
+    try {
+      localStorage.setItem('hero-draft-data', JSON.stringify(updatedData));
+    } catch (err) {
+      console.warn('Could not save draft to localStorage:', err);
+    }
+
+    console.log('Draft saved locally:', updatedData);
+    toast.success('Draft saved locally!');
+  };
+
+  // Publish to database (only when publish is clicked)
+  const publishHeroData = async (newData) => {
     try {
       // Ensure CSRF token is up to date
       const csrfToken = getCSRFToken();
@@ -91,43 +130,78 @@ export const HeroProvider = ({ children }) => {
       }
 
       const updatedData = { ...heroData, ...newData };
-      console.log('Sending hero data update:', updatedData);
+
+      // Clean up undefined values that cause validation errors
+      const cleanedData = {
+        ...updatedData,
+        bgImageUrl: updatedData.bgImageUrl || null, // Use null for nullable URL validation
+        bgImage: updatedData.bgImage || null,
+        bgImageAlt: updatedData.bgImageAlt || null,
+        bgImageName: updatedData.bgImageName || null,
+        ratingScore: updatedData.ratingScore || '',
+        ratingReviews: updatedData.ratingReviews || ''
+      };
+
+      console.log('Publishing hero data to database:', cleanedData);
 
       // Save to database
-      const response = await axios.put('/api/hero/update', updatedData, {
+      const response = await axios.put('/api/hero/update', cleanedData, {
         headers: {
           'X-CSRF-TOKEN': csrfToken,
           'X-Requested-With': 'XMLHttpRequest',
           'Accept': 'application/json',
         }
       });
-      console.log('Hero data updated successfully:', response.data);
+      console.log('Hero data published successfully:', response.data);
 
-      // Update local state with response data
+      // Update all states after successful publish
       if (response.data && response.data.data) {
         setHeroDataFromResponse(response.data.data);
+        setPublishedData(JSON.parse(JSON.stringify(cleanedData)));
+        setDraftData(JSON.parse(JSON.stringify(cleanedData)));
+
+        // Clear localStorage draft since it's now published
+        try {
+          localStorage.removeItem('hero-draft-data');
+        } catch (err) {
+          console.warn('Could not clear draft from localStorage:', err);
+        }
       }
 
       setError(null);
-      toast.success('Hero settings updated successfully!');
+      toast.success('Hero settings published successfully!');
     } catch (err) {
-      console.error('Error updating hero data:', err);
+      console.error('Error publishing hero data:', err);
       console.error('Response status:', err.response?.status);
       console.error('Response data:', err.response?.data);
 
       if (err.response?.status === 401) {
-        setError('Please log in to save hero settings');
-        toast.error('Please log in to save hero settings');
+        setError('Please log in to publish hero settings');
+        toast.error('Please log in to publish hero settings');
       } else if (err.response?.status === 419) {
         setError('Session expired. Please refresh the page and try again.');
         toast.error('Session expired. Please refresh the page and try again.');
       } else if (err.response?.status === 422) {
-        setError('Invalid data: ' + (err.response.data.message || 'Validation failed'));
-        toast.error('Invalid data: ' + (err.response.data.message || 'Validation failed'));
+        const validationErrors = err.response.data.errors;
+        const errorMessage = Object.keys(validationErrors).map(field =>
+          `${field}: ${validationErrors[field].join(', ')}`
+        ).join('; ');
+        setError('Validation failed: ' + errorMessage);
+        toast.error('Validation failed: ' + errorMessage);
+        console.error('Validation errors:', validationErrors);
       } else {
-        setError('Failed to save hero data: ' + (err.response?.data?.message || err.message));
-        toast.error('Failed to save hero data: ' + (err.response?.data?.message || err.message));
+        setError('Failed to publish hero data: ' + (err.response?.data?.message || err.message));
+        toast.error('Failed to publish hero data: ' + (err.response?.data?.message || err.message));
       }
+    }
+  };
+
+  // Legacy function for backward compatibility (now just calls publishHeroData)
+  const updateHeroData = async (newData, shouldPublish = false) => {
+    if (shouldPublish) {
+      await publishHeroData(newData);
+    } else {
+      saveDraftLocally(newData);
     }
   };
 
@@ -308,6 +382,9 @@ export const HeroProvider = ({ children }) => {
 
   const value = {
     heroData,
+    setHeroData, // Add direct setter for undo functionality
+    publishedData, // Add published data to context
+    draftData, // Add draft data to context
     loading,
     error,
     updateHeroData,
@@ -319,7 +396,9 @@ export const HeroProvider = ({ children }) => {
     removeChip,
     uploadChipImages,
     renameBackgroundImage,
-    resetHeroData
+    resetHeroData,
+    saveDraftLocally, // Add local draft save function
+    publishHeroData // Add publish function
   };
 
   return (

@@ -22,9 +22,9 @@ import { becomeMemberData, becomeMemberHandlers } from '../Components/components
 import Facilities from '../Components/components/Facilities';
 import { facilitiesData } from '../Components/components/Facilities/facilitiesData.jsx';
 import RoomsSection from '../Components/components/RoomsSection';
-import { roomsData, suitesData } from '../Components/components/RoomsSection/roomsData';
-import { Header, SiteFooter } from '../components/shared';
-import { footerData } from '../components/shared/SiteFooter/footerData.jsx';
+import { roomsData } from '../Components/components/RoomsSection/roomsData';
+import { Header, SiteFooter } from '../Components/shared';
+import { footerData } from '../Components/shared/SiteFooter/footerData.jsx';
 
 // Import CSS
 import '../Components/App.css';
@@ -77,13 +77,13 @@ export default function Home({ auth }) {
             />
 
             <Facilities
-              titleLines={["All of these", "facilities,", "all for you"]}
+              titleLines={["Everything you need for the", "perfect resort stay."]}
               items={facilitiesData}
-              defaultVisible={12}
+              defaultVisible={9}
             />
 
             <RoomsSection
-              items={[...roomsData, ...suitesData]}
+              items={roomsData}
             />
 
             <EntertainmentStrip />

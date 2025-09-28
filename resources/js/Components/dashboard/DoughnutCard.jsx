@@ -15,12 +15,12 @@ const centerText = {
   afterDatasetsDraw(chart) {
     const {ctx, chartArea:{width,height}} = chart;
     ctx.save();
-    ctx.font = '700 22px Inter, system-ui, sans-serif';
-    ctx.fillStyle = '#e6e9ef';
+    ctx.font = '700 20px Inter, system-ui, sans-serif';
+    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#e6e9ef';
     ctx.textAlign = 'center';
     ctx.fillText('8,452', width/2, height/2 - 2);
-    ctx.font = '500 11px Inter, system-ui, sans-serif';
-    ctx.fillStyle = '#9aa8bf';
+    ctx.font = '500 10px Inter, system-ui, sans-serif';
+    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--muted').trim() || '#9aa8bf';
     ctx.fillText('Total Sessions', width/2, height/2 + 16);
     ctx.restore();
   }
@@ -28,7 +28,7 @@ const centerText = {
 
 const DoughnutCard = ({ data, total, label }) => {
   const doughnutOptions = {
-    cutout: '68%',
+    cutout: '90%',
     plugins: { legend: { display: false } }
   };
 
@@ -48,21 +48,26 @@ const DoughnutCard = ({ data, total, label }) => {
         <h6 className="mb-0">Top Categories</h6>
       </Card.Header>
       <Card.Body>
-        <div style={{ height: '300px' }}>
+        <div style={{ height: '250px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Doughnut data={colorfulDoughnutData} options={doughnutOptions} plugins={[centerText]} />
         </div>
 
         <div className="mt-3 doughnut-legend">
           {colorfulDoughnutData.labels.map((label, index) => (
-            <div key={index} className="doughnut-legend-item">
-              <div
-                className="doughnut-legend-color"
-                style={{ backgroundColor: colorfulDoughnutData.datasets[0].backgroundColor[index] }}
-              />
-              <span className="doughnut-legend-text">{label}</span>
-              <span className="doughnut-legend-value">
-                {colorfulDoughnutData.datasets[0].data[index]}%
-              </span>
+            <div key={index}>
+              <div className="doughnut-legend-item">
+                <div
+                  className="doughnut-legend-color"
+                  style={{ backgroundColor: colorfulDoughnutData.datasets[0].backgroundColor[index] }}
+                />
+                <span className="doughnut-legend-text">{label}</span>
+                <span className="doughnut-legend-value">
+                  {colorfulDoughnutData.datasets[0].data[index]}%
+                </span>
+              </div>
+              {index < colorfulDoughnutData.labels.length - 1 && (
+                <hr className="doughnut-divider" />
+              )}
             </div>
           ))}
         </div>

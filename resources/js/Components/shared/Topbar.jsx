@@ -2,10 +2,21 @@ import React from 'react';
 import { Form, Navbar, Nav, Dropdown } from 'react-bootstrap';
 import { router } from '@inertiajs/react';
 import * as RiIcons from 'react-icons/ri';
+import { refreshCSRFToken } from '../../utils/csrf';
 
 const Topbar = ({ onToggleSidebar, auth }) => {
-  const handleLogout = (e) => {
+  const handleLogout = async (e) => {
     e.preventDefault();
+
+    try {
+      // Refresh CSRF token before logout
+      await refreshCSRFToken();
+      console.log('CSRF token refreshed for logout');
+    } catch (error) {
+      console.error('Failed to refresh CSRF token for logout:', error);
+    }
+
+    // Perform logout with fresh token
     router.post('/logout');
   };
 

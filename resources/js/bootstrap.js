@@ -5,9 +5,18 @@
  */
 
 import axios from 'axios';
+import { setupCSRFToken, setupCSRFInterceptor } from './utils/csrf';
+
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.withCredentials = true; // Important for CSRF cookies
+
+// Set up CSRF token for axios
+setupCSRFToken();
+
+// Set up CSRF interceptors to handle token refresh automatically
+setupCSRFInterceptor(window.axios);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

@@ -2,6 +2,41 @@ import { useEffect, useState } from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
 import '../../../styles/auth.css';
 
+// Utility function to refresh CSRF token
+const refreshCSRFToken = async () => {
+    try {
+        const response = await fetch('/sanctum/csrf-cookie', {
+            method: 'GET',
+            credentials: 'include', // Important for cookies
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+
+            // Update the meta tag with new token
+            const token = document.head.querySelector('meta[name="csrf-token"]');
+            if (token) {
+                token.content = data.token;
+            }
+
+            // Update axios headers
+            if (window.axios) {
+                window.axios.defaults.headers.common['X-CSRF-TOKEN'] = data.token;
+            }
+
+            console.log('CSRF token refreshed successfully');
+        } else {
+            console.error('Failed to refresh CSRF token:', response.status);
+        }
+    } catch (error) {
+        console.error('Failed to refresh CSRF token:', error);
+    }
+};
+
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
@@ -12,6 +47,9 @@ export default function Login({ status, canResetPassword }) {
     const [showPassword, setShowPassword] = useState(false);
 
     useEffect(() => {
+        // Refresh CSRF token when component mounts
+        refreshCSRFToken();
+
         return () => {
             reset('password');
         };
@@ -19,7 +57,28 @@ export default function Login({ status, canResetPassword }) {
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('login'));
+
+        // Refresh CSRF token before submitting
+        const token = document.head.querySelector('meta[name="csrf-token"]');
+        if (token && window.axios) {
+            window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+        }
+
+        post(route('login'), {
+            onError: (errors) => {
+                console.log('Login error:', errors);
+                // If we get a 419 error or no specific errors, try to refresh the CSRF token
+                if (!errors || Object.keys(errors).length === 0) {
+                    console.log('Possible CSRF token issue, refreshing token and retrying...');
+                    refreshCSRFToken().then(() => {
+                        // Retry the login after refreshing token
+                        setTimeout(() => {
+                            post(route('login'));
+                        }, 500);
+                    });
+                }
+            }
+        });
     };
 
     const togglePasswordVisibility = () => {
@@ -33,10 +92,13 @@ export default function Login({ status, canResetPassword }) {
             <div className="auth-card">
                 {/* Header */}
                 <div className="auth-header">
-                    <svg className="auth-logo" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
-                    <h1 className="auth-title">Dashtrans Admin</h1>
+                    <img
+                        src="/storage/logo/Monochrome.png"
+                        alt="Aurora Logo"
+                        className="auth-logo"
+                    />
+                    <hr className="auth-divider" />
+                    <h1 className="auth-title">Dashboard Admin</h1>
                     <p className="auth-subtitle">Please log in to your account</p>
                 </div>
 

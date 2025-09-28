@@ -1,19 +1,21 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Row, Col } from "react-bootstrap";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Keyboard, A11y } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "../../assets/css/home/rooms.css";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Keyboard, A11y } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import '../../assets/css/home/rooms.css';
 
 export default function RoomsSection({ items }) {
   const data = items;
-
   const [swiper, setSwiper] = useState(null);
-  const [pages, setPages] = useState(1);
   const [page, setPage] = useState(0);
+  const [pages, setPages] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const computeProgress = (s) => {
+  // Compute progress based on actual slide position (works with loop mode)
+  const computeProgress = useCallback((s) => {
     // Get the original number of slides (without loop duplicates)
     const originalSlides = data.length;
     const currentIndex = s.realIndex; // Use realIndex for loop mode
@@ -28,21 +30,32 @@ export default function RoomsSection({ items }) {
       totalSlides: originalSlides,
       maxIndex
     };
+  }, [data.length]);
+
+  const handleSlide = (s) => {
+    const progress = computeProgress(s);
+    setActiveIndex(progress.currentIndex);
+    setPage(progress.progressRatio);
+    setPages(1); // We'll use ratio instead of discrete pages
   };
 
   useEffect(() => {
-    if (swiper) {
+    if (!swiper) return;
+
+    // Ensure navigation is properly initialized
+    if (swiper.navigation) {
+      swiper.navigation.init();
+      swiper.navigation.update();
+    }
+
+    const onResize = () => {
       const progress = computeProgress(swiper);
       setPage(progress.progressRatio);
-      setPages(1); // We'll use ratio instead of discrete pages
-    }
-  }, [swiper, data.length]);
-
-  const onSlide = (s) => {
-    const progress = computeProgress(s);
-    setPage(progress.progressRatio);
-    setPages(1);
-  };
+      setPages(1);
+    };
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, [swiper, computeProgress]);
 
   const Icon = ({ d }) => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -55,7 +68,7 @@ export default function RoomsSection({ items }) {
       <Container fluid className="px-3 px-md-4 px-lg-5">
         <Row>
           <Col xs={8}>
-            <h2 className="mb-4 text-center rooms-title mb-md-5">Our beautiful, restful rooms</h2>
+            <h2 className="mb-4 text-center rooms-title mb-md-5">Elegance Awaits in Every Room</h2>
           </Col>
         </Row>
 
@@ -65,27 +78,30 @@ export default function RoomsSection({ items }) {
             <div className="rooms-carousel-wrapper">
               <div className="rooms-wrap">
                 <Swiper
-                  className="rooms-swiper"
-                  modules={[Navigation, Keyboard, A11y]}
+                  modules={[Navigation, Pagination, Keyboard, A11y]}
                   observer
                   observeParents
                   resizeObserver
-                  navigation={{ prevEl: ".rooms-prev", nextEl: ".rooms-next" }}
-                  keyboard={{ enabled: true }}
-                  loop={true}
-                  loopAdditionalSlides={2}
-                  loopedSlides={2}
-                  slidesPerView={4}
+                  slidesPerView={3}
                   spaceBetween={12}
+                  keyboard={{ enabled: true }}
+                  navigation={{ prevEl: '.rooms-prev', nextEl: '.rooms-next' }}
                   breakpoints={{
                     0: { slidesPerView: 1.2, spaceBetween: 8 },
                     576: { slidesPerView: 1.5, spaceBetween: 10 },
-                    768: { slidesPerView: 2.2, spaceBetween: 12 },
-                    992: { slidesPerView: 3, spaceBetween: 12 },
-                    1200: { slidesPerView: 4, spaceBetween: 12 },
+                    768: { slidesPerView: 2, spaceBetween: 12 },
+                    992: { slidesPerView: 2.5, spaceBetween: 12 },
+                    1200: { slidesPerView: 3, spaceBetween: 12 },
                   }}
                   onSwiper={setSwiper}
-                  onSlideChange={onSlide}
+                  onSlideChange={handleSlide}
+                  centeredSlides={false}
+                  slidesOffsetBefore={0}
+                  slidesOffsetAfter={0}
+                  initialSlide={0}
+                  loop={true}
+                  loopAdditionalSlides={2}
+                  loopedSlides={2}
                 >
                   {data.map(room => (
                     <SwiperSlide key={room.id} className="rooms-slide">
@@ -127,20 +143,20 @@ export default function RoomsSection({ items }) {
                     </SwiperSlide>
                   ))}
                 </Swiper>
+              </div>
 
-                {/* Navigation buttons */}
-                <div className="rooms-nav-group d-none d-md-flex">
-                  <button className="rooms-arrow rooms-prev" aria-label="Previous">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                      <path d="M10.5 3.5 6 8l4.5 4.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </button>
-                  <button className="rooms-arrow rooms-next" aria-label="Next">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{transform: 'scaleX(-1)'}}>
-                      <path d="M10.5 3.5 6 8l4.5 4.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </button>
-                </div>
+              {/* Navigation buttons positioned relative to gallery */}
+              <div className="rooms-nav-group">
+                <button className="rooms-arrow rooms-prev" aria-label="Previous">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M10.5 3.5 6 8l4.5 4.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+                <button className="rooms-arrow rooms-next" aria-label="Next">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{transform:'scaleX(-1)'}}>
+                    <path d="M10.5 3.5 6 8l4.5 4.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
               </div>
 
               {/* progress under carousel */}

@@ -15,7 +15,19 @@ const ResortHero = ({
   onChipClick
 }) => {
   // Get hero data from context
-  const { heroData } = useHero();
+  const { heroData, loading } = useHero();
+
+  // Don't render anything until data is loaded
+  if (loading || !heroData) {
+    return (
+      <section className="resort-hero loading" style={{
+        minHeight: '100vh',
+        backgroundColor: '#000000',
+        width: '100%'
+      }}>
+      </section>
+    );
+  }
 
   // Use context data, fallback to props for backward compatibility
   const title = heroData.title || propTitle || "Rixos Sharm El Sheikh Adults Only 18+";

@@ -17,7 +17,7 @@ const BecomeMember = ({
       <div className="container">
         <div className="row align-items-center">
           {/* Logo Column */}
-          <div className="col-12 col-md-5">
+          <div className="col-12 col-md-4">
             <div className="logo-container">
               <img
                 src={logoSrc}
@@ -28,7 +28,7 @@ const BecomeMember = ({
           </div>
 
           {/* Divider Column (Desktop Only) */}
-          <div className="col-12 col-md-1 d-none d-md-flex">
+          <div className="col-12 col-md-auto d-none d-md-flex">
             <div className="divider"></div>
           </div>
 
@@ -58,6 +58,7 @@ const BecomeMember = ({
                 </button>
 
                 <div className="member-link-container">
+                  <span className="member-prompt">{memberPrompt}</span>
                   <button
                     className="member-link"
                     onClick={onMemberLinkClick}
@@ -65,7 +66,6 @@ const BecomeMember = ({
                   >
                     {memberLinkLabel}
                   </button>
-                  <span className="member-prompt">{memberPrompt}</span>
                 </div>
               </div>
             </div>

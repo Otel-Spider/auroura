@@ -9,16 +9,26 @@ export const footerData = {
         {
             title: "DISCOVER",
             items: [
-                { label: "The Experience", href: "#" },
-                { label: "Hotels & Resorts", href: "#" },
-                { label: "Destinations", href: "#" },
+                { label: "Accommodation", href: "#" },
+                { label: "Dining", href: "#" },
+                { label: "Facilities", href: "#" },
+                { label: "Meetings & Events", href: "#" },
+            ],
+        },
+        {
+            title: "",
+            items: [
+                { label: "Gallery", href: "#" },
+                { label: "Offers", href: "#" },
+                { label: "Our Services", href: "#" },
+                { label: "Downloads", href: "#" },
             ],
         },
         {
             title: "EXPLORE",
             items: [
                 { label: "Offers", href: "#" },
-                { label: "Accor Live Limitless", href: "#" },
+                { label: "Aurora Live Limitless", href: "#" },
             ],
         },
     ],
@@ -43,13 +53,6 @@ export const footerData = {
             href: "#",
             icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg>
         },
-    ],
-    partnerBrands: [
-        { src: "https://qln0xxt0hw0ogxv1.imgix.net/https%3A%2F%2Fimages.ctfassets.net%2F944fk97h13dc%2F6Ni1bOYfNa5qQoVjbSDHEf%2Fcf511a4245d80f0d96e666c681df1ca7%2Frix_2x.svg?ixlib=js-3.8.0&auto=compress&fm=webp&w=1536&s=556bd6988c6b5e2e80b84e9e6611a5bc", alt: "Rixos" },
-        { src: "https://qln0xxt0hw0ogxv1.imgix.net/https%3A%2F%2Fimages.ctfassets.net%2F944fk97h13dc%2F7Er4y4zGhHa5pUMljEJBs1%2F0bce1e66e67e062c67433ddcba1537b0%2Fso_footer.svg?ixlib=js-3.8.0&auto=compress&fm=webp&w=1536&s=1a2d287cf03ec143b83ab8c16266e7d0", alt: "SO/" },
-        { src: "https://qln0xxt0hw0ogxv1.imgix.net/https%3A%2F%2Fimages.ctfassets.net%2F944fk97h13dc%2F4HkfABypb130phQF5g8Ech%2Fc040088782cf9f80315535e553b9480d%2Fvector__2_.svg?ixlib=js-3.8.0&auto=compress&fm=webp&w=1536&s=ababce118cbb450e6029e02eac3e14d0", alt: "Swissôtel" },
-        { src: "https://qln0xxt0hw0ogxv1.imgix.net/https%3A%2F%2Fimages.ctfassets.net%2F944fk97h13dc%2FZB5OqAoNZjCg8OZXqRZN1%2F2442a3fcd053befa028d4fef4d11350d%2Fvector__3_.svg?ixlib=js-3.8.0&auto=compress&fm=webp&w=1536&s=79e486381c9bad626cb1a9c6029f4085", alt: "HYDE" },
-        { src: "https://qln0xxt0hw0ogxv1.imgix.net/https%3A%2F%2Fimages.ctfassets.net%2F944fk97h13dc%2FoFVy01k9mlaRCok4XKdSw%2F7d05bfd930c51e35d51fda1eb6811b42%2FSLS-playa_mujeres_White-cf.svg?ixlib=js-3.8.0&auto=compress&fm=webp&w=1536&s=4d4dd33159d328d30ca597e47600bc81", alt: "SLS" },
     ],
     legalLinks: [
         { label: "Terms & Conditions", href: "#" },

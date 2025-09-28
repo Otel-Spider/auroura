@@ -1,62 +1,50 @@
 export const locationData = {
     heading: "Location",
-    addressHtml: "Paradise Resort & Spa<br/>Coconut Beach, Paradise Island<br/>Nassau, Bahamas",
-    phone: "+1 (242) 555-0123",
-    email: "info@paradiseresort.com",
-    center: [25.0772, -77.3385], // Paradise Island, Bahamas
-    zoom: 14,
+    addressHtml: "Aurora Resort & Spa<br/>Sharm El Sheikh<br/>South Sinai, Egypt",
+    phone: "+20 69 360 0000",
+    email: "info@auroraresort.com",
+    center: [27.9158, 34.3300], // Sharm El Sheikh, Egypt
+    zoom: 10,
     theme: {
-        pinColor: "#7e6936",
-        ringColor: "#7e6936",
-        ringFill: "rgba(126, 105, 54, 0.12)",
+        pinColor: "#d1bb4f",
+        ringColor: "#d1bb4f",
+        ringFill: "rgba(209, 187, 79, 0.12)",
         mapFilter: "sepia(0.45) hue-rotate(20deg)"
     },
     pins: [
         {
             id: "resort-main",
-            lat: 25.0772,
-            lng: -77.3385,
-            title: "Paradise Resort & Spa",
+            lat: 27.9158,
+            lng: 34.3300,
+            title: "Aurora Resort & Spa",
             subtitle: "Main Resort Location",
             radiusMeters: 500
         },
         {
-            id: "beach-access",
-            lat: 25.0750,
-            lng: -77.3400,
-            title: "Private Beach Access",
-            subtitle: "5 min walk from resort"
+            id: "airport",
+            lat: 27.9772,
+            lng: 34.3947,
+            title: "Sharm El Sheikh International Airport",
+            subtitle: "12 km from resort"
         },
         {
-            id: "marina",
-            lat: 25.0790,
-            lng: -77.3350,
-            title: "Paradise Marina",
-            subtitle: "Boat tours & water sports",
-            radiusMeters: 300
+            id: "naama-bay",
+            lat: 27.9167,
+            lng: 34.3333,
+            title: "Na'ama Bay",
+            subtitle: "20 km from resort"
         },
         {
-            id: "golf-course",
-            lat: 25.0820,
-            lng: -77.3420,
-            title: "Oceanview Golf Course",
-            subtitle: "18-hole championship course"
-        },
-        {
-            id: "shopping",
-            lat: 25.0740,
-            lng: -77.3450,
-            title: "Paradise Shopping Center",
-            subtitle: "Boutiques & restaurants"
+            id: "cairo",
+            lat: 30.0444,
+            lng: 31.2357,
+            title: "Cairo",
+            subtitle: "500 km from resort"
         }
     ],
     nearest: [
-        { label: "Atlantis Paradise Island", km: 2.1 },
-        { label: "Nassau International Airport", km: 8.5 },
-        { label: "Downtown Nassau", km: 12.3 },
-        { label: "Cable Beach", km: 15.7 },
-        { label: "Blue Lagoon Island", km: 18.2 },
-        { label: "Exuma Cays", km: 45.8 },
-        { label: "Pig Beach", km: 52.1 }
+        { label: "Sharm El Sheikh International Airport", km: 12 },
+        { label: "Na'ama Bay", km: 20 },
+        { label: "Cairo", km: 500 }
     ]
 };

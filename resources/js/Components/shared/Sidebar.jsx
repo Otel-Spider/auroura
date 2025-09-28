@@ -25,12 +25,18 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
     setPagesOpen(false);
   };
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
+  const handleMouseEnter = (e) => {
+    // Only activate hover when the sidebar is collapsed
+    if (isCollapsed) {
+      setIsHovered(true);
+    }
   };
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
+  const handleMouseLeave = (e) => {
+    // Only deactivate hover when leaving the sidebar completely
+    if (isCollapsed) {
+      setIsHovered(false);
+    }
   };
 
   const handleToggleClick = (e) => {
@@ -49,6 +55,24 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
         />
       )}
 
+      {/* Hover Zone - only visible when sidebar is collapsed */}
+      {isCollapsed && (
+        <div
+          className="sidebar-hover-zone"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '20px',
+            height: '100vh',
+            zIndex: 999,
+            background: 'transparent'
+          }}
+        />
+      )}
+
       {/* Sidebar */}
       <div
         className={`sidebar ${isCollapsed ? 'collapsed' : ''} ${isHovered ? 'hovered' : ''}`}
@@ -56,7 +80,7 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
         onMouseLeave={handleMouseLeave}
       >
         {/* Toggle Button - positioned above header */}
-        <div className="sidebar-toggle">
+        <div className={`sidebar-toggle ${isCollapsed && !isHovered ? 'd-none' : ''}`}>
           <button
             className="toggle-btn"
             onClick={handleToggleClick}
@@ -69,10 +93,11 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
         <div className="sidebar-header">
           <div className="sidebar-logo">
             <img
-              src="https://static.wixstatic.com/media/f57497_e724bd3950134b9badbd5bca5b0824b4~mv2.png/v1/fill/w_223,h_80,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20Head%20Office%20Base%20Horizontal%20Transpa.png"
-              alt="Aurora Logo"
+              src="/storage/logo/otel-fav.png"
+              alt="Otel Spider"
               className="logo-image"
             />
+            <span className="logo-text">Otel Spider</span>
           </div>
         </div>
 
@@ -133,9 +158,9 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
             </Nav.Item>
 
             {/* Media Manager */}
-            <Nav.Item>
-              <div className="nav-link disabled" style={{ cursor: 'not-allowed', opacity: 0.6 }}>
-                <RiIcons.RiImageLine size={20} />
+            <Nav.Item style={isCollapsed ? {margin: '0rem 0rem -.8rem'} : {}}>
+              <div className="nav-link disabled" style={{ cursor: 'not-allowed', opacity: 0.6, }}>
+                <RiIcons.RiImageLine size={isCollapsed ? 24 : 20} />
                 <span>Media Manager</span>
               </div>
             </Nav.Item>
@@ -181,9 +206,9 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
             </Nav.Item>
 
             {/* Website Inquiries */}
-            <Nav.Item>
-              <div className="nav-link disabled" style={{ cursor: 'not-allowed', opacity: 0.6 }}>
-                <RiIcons.RiMessageLine size={20} />
+            <Nav.Item style={isCollapsed ? {margin: '0rem 0rem -.8rem'} : {}}>
+              <div className="nav-link disabled" style={{ cursor: 'not-allowed', opacity: 0.6, }}>
+                <RiIcons.RiMessageLine size={isCollapsed ? 24 : 20} />
                 <span>Website Inquiries</span>
               </div>
             </Nav.Item>
@@ -191,7 +216,7 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
             {/* Website Settings */}
             <Nav.Item>
               <div className="nav-link disabled" style={{ cursor: 'not-allowed', opacity: 0.6 }}>
-                <RiIcons.RiSettingsLine size={20} />
+                <RiIcons.RiSettingsLine size={isCollapsed ? 24 : 20} />
                 <span>Website Settings</span>
               </div>
             </Nav.Item>

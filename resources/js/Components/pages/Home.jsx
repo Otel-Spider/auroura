@@ -47,7 +47,7 @@ const Home = () => {
   return (
     <div className="home">
       <ResortHero
-        logoSrc="https://static.wixstatic.com/media/f57497_e724bd3950134b9badbd5bca5b0824b4~mv2.png/v1/fill/w_223,h_80,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20Head%20Office%20Base%20Horizontal%20Transpa.png"
+        logoSrc="/storage/logo/Logo.png"
         bgImageUrl="https://qln0xxt0hw0ogxv1.imgix.net/https%3A%2F%2Fimages.ctfassets.net%2F944fk97h13dc%2F4xadrTCxgBoi6rstnDUJsI%2Ff14ca28071ea66bcf22a16a9f058632a%2FSSH_General_1A.jpg?ixlib=js-3.8.0&auto=compress&fm=webp&w=1536&s=d3d14ec710f6cfa82200a6d13050e8bd"
         onChipClick={handleChipClick}
         parallax={true}
@@ -63,9 +63,9 @@ const Home = () => {
         onOpenGallery={handleOpenGallery}
       />
 <Facilities
-        titleLines={["All of these", "facilities,", "all for you"]}
+        titleLines={["Everything you need for the", "perfect resort stay."]}
         items={facilitiesData}
-        defaultVisible={12}
+        defaultVisible={9}
       />
       <RoomsSection
         items={[...roomsData, ...suitesData]}
@@ -145,7 +145,7 @@ const Home = () => {
         onMemberLinkClick={becomeMemberHandlers.onMemberLinkClick}
       />
 
-      
+
     </div>
   );
 };

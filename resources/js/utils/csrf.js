@@ -33,7 +33,7 @@ export const refreshCSRFToken = async () => {
         // Get fresh token from server
         const response = await fetch('/sanctum/csrf-cookie', {
             method: 'GET',
-            credentials: 'same-origin',
+            credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest'
@@ -53,6 +53,11 @@ export const refreshCSRFToken = async () => {
                     document.head.appendChild(metaTag);
                 }
                 metaTag.content = newToken;
+
+                // Update axios headers
+                if (window.axios) {
+                    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = newToken;
+                }
 
                 console.log('CSRF token refreshed successfully:', newToken);
                 return newToken;

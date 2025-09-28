@@ -1,16 +1,19 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Keyboard, A11y } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "../../assets/css/home/dining-carousel.css";
+import React, { useState, useEffect, useCallback } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Keyboard, A11y } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import '../../assets/css/home/dining-carousel.css';
 
 export default function DiningCarousel({ restaurants = [] }) {
   const [swiper, setSwiper] = useState(null);
-  const [pages, setPages] = useState(1);
   const [page, setPage] = useState(0);
+  const [pages, setPages] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const computeProgress = (s) => {
+  // Compute progress based on actual slide position (works with loop mode)
+  const computeProgress = useCallback((s) => {
     // Get the original number of slides (without loop duplicates)
     const originalSlides = restaurants.length;
     const currentIndex = s.realIndex; // Use realIndex for loop mode
@@ -25,21 +28,26 @@ export default function DiningCarousel({ restaurants = [] }) {
       totalSlides: originalSlides,
       maxIndex
     };
+  }, [restaurants.length]);
+
+  const handleSlide = (s) => {
+    const progress = computeProgress(s);
+    setActiveIndex(progress.currentIndex);
+    setPage(progress.progressRatio);
+    setPages(1); // We'll use ratio instead of discrete pages
   };
 
   useEffect(() => {
-    if (swiper) {
+    if (!swiper) return;
+
+    const onResize = () => {
       const progress = computeProgress(swiper);
       setPage(progress.progressRatio);
-      setPages(1); // We'll use ratio instead of discrete pages
-    }
-  }, [swiper, restaurants.length]);
-
-  const onSlide = (s) => {
-    const progress = computeProgress(s);
-    setPage(progress.progressRatio);
-    setPages(1);
-  };
+      setPages(1);
+    };
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, [swiper, computeProgress]);
 
   const Icon = ({ d, className = "" }) => (
     <svg
@@ -58,31 +66,32 @@ export default function DiningCarousel({ restaurants = [] }) {
   return (
     <section className="dining-carousel-section">
       <div className="container">
-        <h2 className="dining-title">Chart a culinary odyssey</h2>
+        <h2 className="dining-title">Savor a world of flavors</h2>
 
         {/* Carousel */}
         <div className="dining-carousel-wrapper">
           <div className="dining-wrap">
             <Swiper
-              className="dining-swiper"
-              modules={[Navigation, Keyboard, A11y]}
+              modules={[Navigation, Pagination, Keyboard, A11y]}
               observer
               observeParents
               resizeObserver
-              navigation={{ prevEl: ".dining-prev", nextEl: ".dining-next" }}
-              keyboard={{ enabled: true }}
-              loop={true}
-              loopAdditionalSlides={2}
-              loopedSlides={2}
-              slidesPerView={3.5}
+              slidesPerView={3}
               spaceBetween={24}
+              keyboard={{ enabled: true }}
+              navigation={{ prevEl: '.dining-prev', nextEl: '.dining-next' }}
               breakpoints={{
                 0: { slidesPerView: 1.2, spaceBetween: 16 },
-                768: { slidesPerView: 2.2, spaceBetween: 20 },
-                1200: { slidesPerView: 3.5, spaceBetween: 24 },
+                768: { slidesPerView: 2, spaceBetween: 20 },
+                1200: { slidesPerView: 3, spaceBetween: 24 },
               }}
               onSwiper={setSwiper}
-              onSlideChange={onSlide}
+              onSlideChange={handleSlide}
+              centeredSlides={false}
+              slidesOffsetBefore={0}
+              slidesOffsetAfter={0}
+              initialSlide={0}
+              loop={true}
             >
               {restaurants.map(restaurant => (
                 <SwiperSlide key={restaurant.id} className="dining-slide">
@@ -126,20 +135,20 @@ export default function DiningCarousel({ restaurants = [] }) {
                 </SwiperSlide>
               ))}
             </Swiper>
+          </div>
 
-            {/* Navigation buttons */}
-            <div className="dining-nav-group">
-              <button className="dining-arrow dining-prev" aria-label="Previous">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M10.5 3.5 6 8l4.5 4.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
-              <button className="dining-arrow dining-next" aria-label="Next">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{transform: 'scaleX(-1)'}}>
-                  <path d="M10.5 3.5 6 8l4.5 4.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
-            </div>
+          {/* Navigation buttons positioned relative to gallery */}
+          <div className="dining-nav-group">
+            <button className="dining-arrow dining-prev" aria-label="Previous">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M10.5 3.5 6 8l4.5 4.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+            <button className="dining-arrow dining-next" aria-label="Next">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{transform:'scaleX(-1)'}}>
+                <path d="M10.5 3.5 6 8l4.5 4.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
           </div>
 
           {/* Progress bar */}

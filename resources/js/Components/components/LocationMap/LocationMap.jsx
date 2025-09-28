@@ -22,9 +22,9 @@ const LocationMap = ({
 
   // Merge theme with defaults
   const mergedTheme = useMemo(() => ({
-    pinColor: '#7e6936',
-    ringColor: '#7e6936',
-    ringFill: 'rgba(126,105,54,.12)',
+    pinColor: '#d1bb4f',
+    ringColor: '#d1bb4f',
+    ringFill: 'rgba(209,187,79,.12)',
     textColor: '#111321',
     headingColor: '#0f1d35',
     linkColor: '#0f1d35',
@@ -41,7 +41,7 @@ const LocationMap = ({
         <circle cx="16" cy="16" r="6" fill="#fff"/>
       </svg>
     `;
-    
+
     return new Icon({
       iconUrl: `data:image/svg+xml;base64,${btoa(svgIcon)}`,
       iconSize: [32, 40],
@@ -53,10 +53,10 @@ const LocationMap = ({
   // Calculate map bounds from pins
   const mapBounds = useMemo(() => {
     if (pins.length === 0) return null;
-    
+
     const lats = pins.map(pin => pin.lat);
     const lngs = pins.map(pin => pin.lng);
-    
+
     return [
       [Math.min(...lats), Math.min(...lngs)],
       [Math.max(...lats), Math.max(...lngs)]
@@ -97,7 +97,7 @@ const LocationMap = ({
               url={tilesUrl}
               attribution={tilesAttribution}
             />
-            
+
             {pins.map((pin) => (
               <React.Fragment key={pin.id}>
                 <Marker
@@ -114,7 +114,7 @@ const LocationMap = ({
                     </div>
                   </Popup>
                 </Marker>
-                
+
                 {pin.radiusMeters && (
                   <Circle
                     center={[pin.lat, pin.lng]}
@@ -135,29 +135,29 @@ const LocationMap = ({
             <div className="container-xxl">
               <div className="row">
                 <div className="col-12 col-md-5 col-lg-4">
-                  <div 
+                  <div
                     className="info-panel"
-                    style={{ 
+                    style={{
                       backgroundColor: mergedTheme.panelBg,
                       color: mergedTheme.textColor
                     }}
                   >
-                    <h2 
+                    <h2
                       className="info-heading"
                       style={{ color: mergedTheme.headingColor }}
                     >
                       {heading}
                     </h2>
-                    
-                    <div 
+
+                    <div
                       className="info-address"
                       dangerouslySetInnerHTML={{ __html: addressHtml }}
                       style={{ color: mergedTheme.textColor }}
                     />
-                    
+
                     <div className="info-contact">
                       <p className="contact-item">
-                        <a 
+                        <a
                           href={`tel:${phone}`}
                           style={{ color: mergedTheme.linkColor }}
                         >
@@ -165,7 +165,7 @@ const LocationMap = ({
                         </a>
                       </p>
                       <p className="contact-item">
-                        <a 
+                        <a
                           href={`mailto:${email}`}
                           style={{ color: mergedTheme.linkColor }}
                         >
@@ -186,7 +186,7 @@ const LocationMap = ({
                           ))}
                         </ul>
                         {nearest.length > 3 && (
-                          <button 
+                          <button
                             className="nearest-toggle"
                             onClick={toggleNearest}
                             style={{ color: mergedTheme.linkColor }}
@@ -218,7 +218,7 @@ const LocationMap = ({
                 url={tilesUrl}
                 attribution={tilesAttribution}
               />
-              
+
               {pins.map((pin) => (
                 <React.Fragment key={pin.id}>
                   <Marker
@@ -235,7 +235,7 @@ const LocationMap = ({
                       </div>
                     </Popup>
                   </Marker>
-                  
+
                   {pin.radiusMeters && (
                     <Circle
                       center={[pin.lat, pin.lng]}
@@ -255,29 +255,29 @@ const LocationMap = ({
 
           <div className="location-mobile-info">
             <div className="container">
-              <div 
+              <div
                 className="info-panel"
-                style={{ 
+                style={{
                   backgroundColor: mergedTheme.panelBg,
                   color: mergedTheme.textColor
                 }}
               >
-                <h2 
+                <h2
                   className="info-heading"
                   style={{ color: mergedTheme.headingColor }}
                 >
                   {heading}
                 </h2>
-                
-                <div 
+
+                <div
                   className="info-address"
                   dangerouslySetInnerHTML={{ __html: addressHtml }}
                   style={{ color: mergedTheme.textColor }}
                 />
-                
+
                 <div className="info-contact">
                   <p className="contact-item">
-                    <a 
+                    <a
                       href={`tel:${phone}`}
                       style={{ color: mergedTheme.linkColor }}
                     >
@@ -285,7 +285,7 @@ const LocationMap = ({
                     </a>
                   </p>
                   <p className="contact-item">
-                    <a 
+                    <a
                       href={`mailto:${email}`}
                       style={{ color: mergedTheme.linkColor }}
                     >
@@ -306,7 +306,7 @@ const LocationMap = ({
                       ))}
                     </ul>
                     {nearest.length > 3 && (
-                      <button 
+                      <button
                         className="nearest-toggle"
                         onClick={toggleNearest}
                         style={{ color: mergedTheme.linkColor }}

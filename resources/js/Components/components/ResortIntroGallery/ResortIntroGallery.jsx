@@ -124,9 +124,7 @@ const ResortIntroGallery = ({
               <h1 className="rig-title">{title}</h1>
 
               <div className="rig-description">
-                <p>
-                  {description}
-                </p>
+                <div dangerouslySetInnerHTML={{ __html: description }} />
               </div>
 
               <div className="rig-check-info">

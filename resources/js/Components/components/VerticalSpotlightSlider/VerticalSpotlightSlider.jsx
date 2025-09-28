@@ -13,6 +13,7 @@ const VerticalSpotlightSlider = ({
   const [slideDirection, setSlideDirection] = useState('right'); // 'left' or 'right'
   const [page, setPage] = useState(0);
   const [pages, setPages] = useState(1);
+  const [fadeDirection, setFadeDirection] = useState('right');
   const textColumnRef = useRef(null);
   const componentRef = useRef(null);
   const wheelThrottleRef = useRef(null);
@@ -38,6 +39,7 @@ const VerticalSpotlightSlider = ({
 
     setIsAnimating(true);
     setSlideDirection(direction);
+    setFadeDirection(direction);
     setActiveIndex(newIndex);
 
     // Update progress
@@ -48,7 +50,7 @@ const VerticalSpotlightSlider = ({
     // Reset animation state after transition
     setTimeout(() => {
       setIsAnimating(false);
-    }, 600);
+    }, 300);
   }, [activeIndex, isAnimating, slides.length, computeProgress]);
 
   const goToPrevious = useCallback(() => {
@@ -125,12 +127,73 @@ const VerticalSpotlightSlider = ({
     setPages(1);
   }, [activeIndex, computeProgress]);
 
+  // Preload adjacent images for faster transitions
+  useEffect(() => {
+    const preloadImage = (src) => {
+      const img = new Image();
+      img.src = src;
+      // Set additional attributes for faster loading
+      img.crossOrigin = 'anonymous';
+      img.loading = 'eager';
+    };
+
+    // Preload next image
+    if (activeIndex < slides.length - 1) {
+      preloadImage(slides[activeIndex + 1].image);
+    }
+
+    // Preload previous image
+    if (activeIndex > 0) {
+      preloadImage(slides[activeIndex - 1].image);
+    }
+
+    // Preload images 2 steps ahead for even faster navigation
+    if (activeIndex < slides.length - 2) {
+      preloadImage(slides[activeIndex + 2].image);
+    }
+    if (activeIndex > 1) {
+      preloadImage(slides[activeIndex - 2].image);
+    }
+  }, [activeIndex, slides]);
+
+  // Preload all images on component mount for maximum speed
+  useEffect(() => {
+    const preloadAllImages = () => {
+      slides.forEach((slide, index) => {
+        if (index !== activeIndex) { // Don't preload current image again
+          const img = new Image();
+          img.src = slide.image;
+          img.crossOrigin = 'anonymous';
+          img.loading = 'eager';
+        }
+      });
+    };
+
+    // Preload all images immediately for maximum speed
+    preloadAllImages();
+
+    return () => {};
+  }, [slides, activeIndex]);
+
   if (!slides.length) return null;
 
   const activeSlide = slides[activeIndex];
 
+  // Add resource hints for faster loading - preload all images
+  const preloadLinks = slides.map((slide, index) => (
+    <link
+      key={`preload-${index}`}
+      rel="preload"
+      as="image"
+      href={slide.image}
+      fetchPriority="high"
+    />
+  ));
+
   return (
     <section className="vertical-spotlight-slider" ref={componentRef}>
+      {/* Preload critical images */}
+      {preloadLinks}
       <div className="vss-background">
         <div className="container-xxl">
           <div className="vss-header">
@@ -173,9 +236,9 @@ const VerticalSpotlightSlider = ({
                   <div
                     className={`vss-image ${
                       isAnimating
-                        ? slideDirection === 'right'
-                          ? 'vss-image-slide-in-right'
-                          : 'vss-image-slide-in-left'
+                        ? fadeDirection === 'right'
+                          ? 'vss-image-fade-right'
+                          : 'vss-image-fade-left'
                         : 'vss-image-current'
                     }`}
                     aria-live="polite"
@@ -183,7 +246,9 @@ const VerticalSpotlightSlider = ({
                     <img
                       src={activeSlide.image}
                       alt={activeSlide.title}
-                      loading="lazy"
+                      loading="eager"
+                      decoding="async"
+                      fetchPriority="high"
                     />
                   </div>
                 </div>
@@ -240,7 +305,9 @@ const VerticalSpotlightSlider = ({
                 <img
                   src={activeSlide.image}
                   alt={activeSlide.title}
-                  loading="lazy"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
                 />
               </div>
 

@@ -82,18 +82,53 @@ const BookingBar = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, [bookingBarRef]);
 
+  // Helper functions to format selected values
+  const formatDateValue = () => {
+    if (selectedDates.start && selectedDates.end) {
+      const startDate = selectedDates.start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      const endDate = selectedDates.end.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      return `${startDate} – ${endDate}`;
+    } else if (selectedDates.start) {
+      const startDate = selectedDates.start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      return `${startDate} – Select end date`;
+    }
+    return bookingBarData?.date_value || propDateValue;
+  };
+
+  const formatGuestsValue = () => {
+    const totalGuests = adults + children;
+    const roomText = rooms === 1 ? 'room' : 'rooms';
+    const guestText = totalGuests === 1 ? 'guest' : 'guests';
+    return `${rooms} ${roomText} – ${totalGuests} ${guestText}`;
+  };
+
+  const formatPriceMeta = () => {
+    if (selectedDates.start && selectedDates.end) {
+      const timeDiff = selectedDates.end.getTime() - selectedDates.start.getTime();
+      const nights = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      const totalGuests = adults + children;
+      const nightText = nights === 1 ? 'night' : 'nights';
+      const guestText = totalGuests === 1 ? 'guest' : 'guests';
+      return `${nights} ${nightText} – ${totalGuests} ${guestText}`;
+    }
+    return bookingBarData?.price_meta || propPrice.meta;
+  };
+
   // Use API data or fallback to props
   const title = bookingBarData?.title || propTitle;
   const dateLabel = bookingBarData?.date_label || propDateLabel;
-  const dateValue = bookingBarData?.date_value || propDateValue;
+  const dateValue = formatDateValue();
   const guestsLabel = bookingBarData?.guests_label || propGuestsLabel;
-  const guestsValue = bookingBarData?.guests_value || propGuestsValue;
+  const guestsValue = formatGuestsValue();
   const ctaText = bookingBarData?.cta_text || 'BOOK NOW';
   const price = bookingBarData ? {
     currency: bookingBarData.price_currency,
     amount: bookingBarData.price_amount,
-    meta: bookingBarData.price_meta
-  } : propPrice;
+    meta: formatPriceMeta()
+  } : {
+    ...propPrice,
+    meta: formatPriceMeta()
+  };
 
   const handleOpenDates = () => {
     setShowDatesDropdown(!showDatesDropdown);
@@ -132,11 +167,26 @@ const BookingBar = ({
       } else {
         setSelectedDates({ start: selectedDates.start, end: date });
       }
+      // Close the dropdown after selection is complete
+      setTimeout(() => {
+        setShowDatesDropdown(false);
+      }, 500);
     }
   };
 
   const handleResetDates = () => {
     setSelectedDates({ start: null, end: null });
+  };
+
+  // Handle guest selection completion
+  const handleGuestsChange = (newRooms, newAdults, newChildren) => {
+    setRooms(newRooms);
+    setAdults(newAdults);
+    setChildren(newChildren);
+    // Close the dropdown after a short delay to allow user to see the change
+    setTimeout(() => {
+      setShowGuestsDropdown(false);
+    }, 300);
   };
 
   // Mobile off-canvas handlers
@@ -307,9 +357,9 @@ const BookingBar = ({
                     rooms={rooms}
                     adults={adults}
                     children={children}
-                    setRooms={setRooms}
-                    setAdults={setAdults}
-                    setChildren={setChildren}
+                    setRooms={(newRooms) => handleGuestsChange(newRooms, adults, children)}
+                    setAdults={(newAdults) => handleGuestsChange(rooms, newAdults, children)}
+                    setChildren={(newChildren) => handleGuestsChange(rooms, adults, newChildren)}
                   />
                 </div>
               )}
@@ -406,9 +456,9 @@ const BookingBar = ({
                       rooms={rooms}
                       adults={adults}
                       children={children}
-                      setRooms={setRooms}
-                      setAdults={setAdults}
-                      setChildren={setChildren}
+                      setRooms={(newRooms) => handleGuestsChange(newRooms, adults, children)}
+                      setAdults={(newAdults) => handleGuestsChange(rooms, newAdults, children)}
+                      setChildren={(newChildren) => handleGuestsChange(rooms, adults, newChildren)}
                     />
                   </div>
                 )}

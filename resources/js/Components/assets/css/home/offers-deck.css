@@ -1,340 +1,337 @@
 /* Design Tokens */
 :root {
-  --od-navy-1: #0d0f2a; /* dark */
-  --od-navy-2: #1b1942; /* lighter */
-  --od-white: #fff;
-  --od-muted: rgba(255, 255, 255, 0.7);
-  --od-card-radius: 12px;
-  --od-shadow: 0 14px 28px rgba(0, 0, 0, 0.35), 0 10px 10px rgba(0, 0, 0, 0.18);
-  --od-highlight: rgba(255, 255, 255, 0.95);
+    --od-navy-1: #333333; /* dark */
+    --od-navy-2: #333333; /* lighter */
+    --od-white: #fff;
+    --od-muted: rgba(255, 255, 255, 0.7);
+    --od-card-radius: 12px;
+    --od-shadow: 0 14px 28px rgba(0, 0, 0, 0.35),
+        0 10px 10px rgba(0, 0, 0, 0.18);
+    --od-highlight: rgba(255, 255, 255, 0.95);
 }
 
 /* Main Section */
 .offers-deck {
-  padding: 6rem 0;
-  background: radial-gradient(
-    ellipse at center,
-    var(--od-navy-2) 0%,
-    var(--od-navy-1) 100%
-  );
-  position: relative;
-  overflow: hidden;
+    padding: 6rem 0;
+    background: var(--od-navy-1);
+    position: relative;
+    overflow: hidden;
 }
 
 /* Content Section */
 .od-content {
-  padding: 2rem 0;
+    padding: 2rem 0;
 }
 
 .od-eyebrow {
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--od-muted);
-  margin-bottom: 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--od-muted);
+    margin-bottom: 1rem;
 }
 
 .od-heading {
-  font-family: "Georgia", "Times New Roman", serif;
-  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
-  font-weight: 500;
-  line-height: 1.2;
-  color: var(--od-white);
-  margin-bottom: 1.5rem;
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--od-white);
+    margin-bottom: 1.5rem;
 }
 
 .od-intro {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 55ch;
-  margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 55ch;
+    margin: 0;
 }
 
 /* Deck Container */
 .od-deck-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 500px;
-  padding: 2rem 0;
-  z-index: 0;
-  position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+    padding: 2rem 0;
+    z-index: 0;
+    position: relative;
 }
 
 .od-deck {
-  position: relative;
-  width: min(520px, 46vw);
-  aspect-ratio: 3/4;
-  max-width: 100%;
+    position: relative;
+    width: min(520px, 46vw);
+    aspect-ratio: 3/4;
+    max-width: 100%;
 }
 
 /* Card Styles */
 .od-card {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  border-radius: var(--od-card-radius);
-  overflow: hidden;
-  box-shadow: var(--od-shadow);
-  transition: transform 0.35s ease, opacity 0.3s ease, box-shadow 0.3s ease;
-  outline: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: var(--od-card-radius);
+    overflow: hidden;
+    box-shadow: var(--od-shadow);
+    transition: transform 0.35s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
 }
 
 .od-card:focus-visible {
-  outline: 2px solid var(--od-white);
-  outline-offset: 4px;
+    outline: 2px solid var(--od-white);
+    outline-offset: 4px;
 }
 
 .od-card--active {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .od-card--active:hover {
-  transform: translateY(-2px) scale(1) rotate(0deg) !important;
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4), 0 12px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px) scale(1) rotate(0deg) !important;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4), 0 12px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Card Image */
 .od-card-image {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
 }
 
 .od-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
 }
 
 .od-card--active:hover .od-card-image img {
-  transform: scale(1.02);
+    transform: scale(1.02);
 }
 
 /* Overlay */
 .od-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.6) 50%,
-    rgba(0, 0, 0, 0.2) 80%,
-    transparent 100%
-  );
-  padding: 2rem 1.5rem 1.5rem;
-  display: flex;
-  align-items: flex-end;
-  min-height: 50%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.6) 50%,
+        rgba(0, 0, 0, 0.2) 80%,
+        transparent 100%
+    );
+    padding: 2rem 1.5rem 1.5rem;
+    display: flex;
+    align-items: flex-end;
+    min-height: 50%;
 }
 
 .od-overlay-content {
-  text-align: center;
-  width: 100%;
+    text-align: center;
+    width: 100%;
 }
 
 .od-overlay-title {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 700;
-  color: var(--od-white);
-  margin-bottom: 0.5rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  line-height: 1.2;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 700;
+    color: var(--od-white);
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
 }
 
 .od-overlay-subtitle {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--od-muted);
-  margin-bottom: 0.75rem;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--od-muted);
+    margin-bottom: 0.75rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .od-overlay-blurb {
-  font-size: 0.95rem;
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 1rem;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .od-overlay-cta {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background: var(--od-white);
-  color: var(--od-navy-1);
-  border-radius: 25px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--od-white);
+    color: var(--od-navy-1);
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .od-overlay-cta:hover {
-  background: var(--od-highlight);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    background: var(--od-highlight);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
 .od-cta-text {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 /* Responsive Design */
 @media (max-width: 1199.98px) {
-  .offers-deck {
-    padding: 5rem 0;
-  }
+    .offers-deck {
+        padding: 5rem 0;
+    }
 
-  .od-deck {
-    width: min(480px, 50vw);
-  }
+    .od-deck {
+        width: min(480px, 50vw);
+    }
 }
 
 @media (max-width: 991.98px) {
-  .offers-deck {
-    padding: 4rem 0;
-  }
+    .offers-deck {
+        padding: 4rem 0;
+    }
 
-  .od-content {
-    padding: 1rem 0 2rem;
-    text-align: center;
-  }
+    .od-content {
+        padding: 1rem 0 2rem;
+        text-align: center;
+    }
 
-  .od-intro {
-    max-width: none;
-  }
+    .od-intro {
+        max-width: none;
+    }
 
-  .od-deck-container {
-    min-height: 400px;
-    padding: 1rem 0;
-  }
+    .od-deck-container {
+        min-height: 400px;
+        padding: 1rem 0;
+    }
 
-  .od-deck {
-    width: min(420px, 70vw);
-  }
+    .od-deck {
+        width: min(420px, 70vw);
+    }
 
-  .od-overlay {
-    padding: 1.5rem 1rem 1rem;
-  }
+    .od-overlay {
+        padding: 1.5rem 1rem 1rem;
+    }
 
-  .od-overlay-title {
-    font-size: clamp(1.3rem, 5vw, 1.8rem);
-  }
+    .od-overlay-title {
+        font-size: clamp(1.3rem, 5vw, 1.8rem);
+    }
 }
 
 @media (max-width: 767.98px) {
-  .offers-deck {
-    padding: 3rem 0;
-  }
+    .offers-deck {
+        padding: 3rem 0;
+    }
 
-  .od-content {
-    padding: 0.5rem 0 1.5rem;
-  }
+    .od-content {
+        padding: 0.5rem 0 1.5rem;
+    }
 
-  .od-heading {
-    font-size: clamp(1.6rem, 6vw, 2.2rem);
-    margin-bottom: 1rem;
-  }
+    .od-heading {
+        font-size: clamp(1.6rem, 6vw, 2.2rem);
+        margin-bottom: 1rem;
+    }
 
-  .od-intro {
-    font-size: 1rem;
-  }
+    .od-intro {
+        font-size: 1rem;
+    }
 
-  .od-deck-container {
-    min-height: 350px;
-  }
+    .od-deck-container {
+        min-height: 350px;
+    }
 
-  .od-deck {
-    width: min(380px, 80vw);
-  }
+    .od-deck {
+        width: min(380px, 80vw);
+    }
 
-  .od-overlay {
-    padding: 1.25rem 0.75rem 0.75rem;
-  }
+    .od-overlay {
+        padding: 1.25rem 0.75rem 0.75rem;
+    }
 
-  .od-overlay-title {
-    font-size: clamp(1.2rem, 6vw, 1.6rem);
-    margin-bottom: 0.25rem;
-  }
+    .od-overlay-title {
+        font-size: clamp(1.2rem, 6vw, 1.6rem);
+        margin-bottom: 0.25rem;
+    }
 
-  .od-overlay-subtitle {
-    font-size: 0.85rem;
-    margin-bottom: 0.5rem;
-  }
+    .od-overlay-subtitle {
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+    }
 
-  .od-overlay-blurb {
-    font-size: 0.9rem;
-    margin-bottom: 0.75rem;
-  }
+    .od-overlay-blurb {
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
+    }
 
-  .od-overlay-cta {
-    padding: 0.6rem 1.25rem;
-    font-size: 0.85rem;
-  }
+    .od-overlay-cta {
+        padding: 0.6rem 1.25rem;
+        font-size: 0.85rem;
+    }
 }
 
 @media (max-width: 575.98px) {
-  .offers-deck {
-    padding: 2.5rem 0;
-  }
+    .offers-deck {
+        padding: 2.5rem 0;
+    }
 
-  .od-deck-container {
-    min-height: 300px;
-  }
+    .od-deck-container {
+        min-height: 300px;
+    }
 
-  .od-deck {
-    width: min(320px, 85vw);
-  }
+    .od-deck {
+        width: min(320px, 85vw);
+    }
 
-  .od-overlay {
-    padding: 1rem 0.5rem 0.5rem;
-  }
+    .od-overlay {
+        padding: 1rem 0.5rem 0.5rem;
+    }
 
-  .od-overlay-title {
-    font-size: clamp(1.1rem, 7vw, 1.4rem);
-  }
+    .od-overlay-title {
+        font-size: clamp(1.1rem, 7vw, 1.4rem);
+    }
 
-  .od-overlay-subtitle {
-    font-size: 0.8rem;
-  }
+    .od-overlay-subtitle {
+        font-size: 0.8rem;
+    }
 
-  .od-overlay-blurb {
-    font-size: 0.85rem;
-  }
+    .od-overlay-blurb {
+        font-size: 0.85rem;
+    }
 
-  .od-overlay-cta {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-  }
+    .od-overlay-cta {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
 }
 
 /* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
-  .od-card--active:hover {
-    transform: translateY(0) scale(1) rotate(0deg) !important;
-  }
+    .od-card--active:hover {
+        transform: translateY(0) scale(1) rotate(0deg) !important;
+    }
 
-  .od-card--active:hover .od-card-image img {
-    transform: scale(1);
-  }
+    .od-card--active:hover .od-card-image img {
+        transform: scale(1);
+    }
 
-  .od-overlay-cta:hover {
-    transform: none;
-  }
+    .od-overlay-cta:hover {
+        transform: none;
+    }
 }
