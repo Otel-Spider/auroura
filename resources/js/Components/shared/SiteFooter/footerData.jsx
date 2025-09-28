@@ -63,5 +63,5 @@ export const footerData = {
         { label: "Legal Notice", href: "#" },
         { label: "Do Not Sell My Personal Information", href: "#" },
     ],
-    copyrightText: "© 202005 All Rights Reserved"
+    copyrightText: "© 202001115 All Rights Reserved"
 };
