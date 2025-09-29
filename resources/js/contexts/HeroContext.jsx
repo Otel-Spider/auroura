@@ -51,8 +51,11 @@ export const HeroProvider = ({ children }) => {
   useEffect(() => {
     const fetchHeroData = async () => {
       try {
+        console.log('HeroContext: Starting to fetch hero data...');
         setLoading(true);
         const response = await axios.get('/api/hero/active');
+        console.log('HeroContext: Hero data fetched successfully:', response.data);
+        console.log('HeroContext: Response status:', response.status);
 
         // Convert snake_case API response to camelCase for frontend
         const convertedData = {
@@ -73,14 +76,16 @@ export const HeroProvider = ({ children }) => {
         setPublishedData(convertedData); // Set initial published data
         setDraftData(convertedData); // Set initial draft data
         setError(null);
+        console.log('HeroContext: Hero data set successfully');
       } catch (err) {
-        console.error('Error fetching hero data:', err);
+        console.error('HeroContext: Error fetching hero data:', err);
         setError('Failed to load hero data');
         // Use default data only when there's an actual error
         setHeroData(defaultHeroData);
         setPublishedData(defaultHeroData);
         setDraftData(defaultHeroData);
       } finally {
+        console.log('HeroContext: Setting loading to false');
         setLoading(false);
       }
     };

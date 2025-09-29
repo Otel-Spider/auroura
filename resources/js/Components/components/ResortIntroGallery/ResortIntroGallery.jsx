@@ -174,7 +174,6 @@ const ResortIntroGallery = ({
                 initialSlide={0}
                 loop={true}
                 loopAdditionalSlides={2}
-                loopedSlides={2}
               >
                 {images.map((img, i) => (
                   <SwiperSlide key={i} className="rig-slide">

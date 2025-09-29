@@ -15,11 +15,11 @@ const Lightbox = ({ images, initialIndex = 0, onClose }) => {
     // Get the original number of slides (without loop duplicates)
     const originalSlides = images.length;
     const currentIndex = s.realIndex; // Use realIndex for loop mode
-    
+
     // Calculate progress ratio based on original slides
     const maxIndex = Math.max(0, originalSlides - 1);
     const progressRatio = maxIndex > 0 ? currentIndex / maxIndex : 0;
-    
+
     return {
       currentIndex,
       progressRatio,
@@ -45,7 +45,7 @@ const Lightbox = ({ images, initialIndex = 0, onClose }) => {
   // Initialize navigation when swiper is ready
   useEffect(() => {
     if (!swiper) return;
-    
+
     // Ensure navigation is properly initialized
     if (swiper.navigation) {
       swiper.navigation.init();
@@ -60,7 +60,7 @@ const Lightbox = ({ images, initialIndex = 0, onClose }) => {
         onClose();
       }
     };
-    
+
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
@@ -86,7 +86,6 @@ const Lightbox = ({ images, initialIndex = 0, onClose }) => {
         onSlideChange={handleSlide}
         loop={true}
         loopAdditionalSlides={2}
-        loopedSlides={2}
         slidesPerView={1}
         spaceBetween={8}
         centeredSlides={true}
@@ -107,12 +106,12 @@ const Lightbox = ({ images, initialIndex = 0, onClose }) => {
 
       {/* Progress bar */}
       <div className="rig-lightbox-progress-wrap">
-        <div 
-          className="rig-lightbox-progress" 
+        <div
+          className="rig-lightbox-progress"
           style={{
-            '--rig-pages': pages, 
+            '--rig-pages': pages,
             '--rig-page': page
-          }} 
+          }}
         />
       </div>
 

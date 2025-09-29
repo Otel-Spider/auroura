@@ -101,7 +101,6 @@ export default function RoomsSection({ items }) {
                   initialSlide={0}
                   loop={true}
                   loopAdditionalSlides={2}
-                  loopedSlides={2}
                 >
                   {data.map(room => (
                     <SwiperSlide key={room.id} className="rooms-slide">

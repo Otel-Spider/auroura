@@ -12,13 +12,32 @@ const ResortHero = ({
   chips: propChips,
   ratingBadge: propRatingBadge,
   parallax = false,
-  onChipClick
+  onChipClick,
+  // New props for variant support
+  variantName,
+  variantData
 }) => {
   // Get hero data from context
   const { heroData, loading } = useHero();
 
-  // Don't render anything until data is loaded
-  if (loading || !heroData) {
+  // If we have variant data, use it directly instead of context
+  const useVariantData = variantData && Object.keys(variantData).length > 0;
+
+  // Debug logging for all components
+  console.log('ResortHero debug:', {
+    variantName,
+    variantData,
+    useVariantData,
+    hasVariantData: !!variantData,
+    variantDataKeys: variantData ? Object.keys(variantData) : [],
+    loading,
+    hasHeroData: !!heroData,
+    willShowLoading: !variantName && (loading || !heroData)
+  });
+
+  // For variants, always render (even with empty data) to avoid black screen
+  // For non-variants, wait for context data to load
+  if (!variantName && (loading || !heroData)) {
     return (
       <section className="resort-hero loading" style={{
         minHeight: '100vh',
@@ -29,15 +48,27 @@ const ResortHero = ({
     );
   }
 
-  // Use context data, fallback to props for backward compatibility
-  const title = heroData.title || propTitle || "Rixos Sharm El Sheikh Adults Only 18+";
-  const bgImageUrl = heroData.bgImage ? `/storage/${heroData.bgImage}` : (heroData.bgImageUrl || propBgImageUrl);
-  const bgImageAlt = heroData.bgImageAlt || "Resort Hero Background";
-  const bgImageName = heroData.bgImageName || "hero-background";
-  const location = heroData.location || propLocation || "Sharm El Sheikh, Egypt";
+  // Use variant data if available, then context data, fallback to props for backward compatibility
+  const title = useVariantData ? (variantData.title || propTitle || "Rixos Sharm El Sheikh Adults Only 18+")
+    : (heroData?.title || propTitle || "Rixos Sharm El Sheikh Adults Only 18+");
 
-  const stars = heroData.stars || propStars || 5;
-  const chips = heroData.chips || propChips || [
+  const bgImageUrl = useVariantData ?
+    (variantData.bgImage ? `/storage/${variantData.bgImage}` : (variantData.bgImageUrl || propBgImageUrl))
+    : (heroData?.bgImage ? `/storage/${heroData.bgImage}` : (heroData?.bgImageUrl || propBgImageUrl));
+
+  const bgImageAlt = useVariantData ? (variantData.bgImageAlt || "Resort Hero Background")
+    : (heroData?.bgImageAlt || "Resort Hero Background");
+
+  const bgImageName = useVariantData ? (variantData.bgImageName || "hero-background")
+    : (heroData?.bgImageName || "hero-background");
+
+  const location = useVariantData ? (variantData.location || propLocation || "Sharm El Sheikh, Egypt")
+    : (heroData?.location || propLocation || "Sharm El Sheikh, Egypt");
+
+  const stars = useVariantData ? (variantData.stars || propStars || 5)
+    : (heroData?.stars || propStars || 5);
+
+  const chips = useVariantData ? (variantData.chips || propChips || [
     { key: 'all-inclusive', label: 'All Inclusive', icon: 'dining' },
     { key: 'entertainment', label: 'Entertainment', icon: 'entertainment' },
     { key: 'fitness', label: 'Fitness', icon: 'fitness' },
@@ -46,11 +77,26 @@ const ResortHero = ({
     { key: 'watersports', label: 'Watersports', icon: 'watersports' },
     { key: 'beach', label: 'Beach', icon: 'beach' },
     { key: 'romance', label: 'Romance', icon: 'romance' }
-  ];
+  ]) : (heroData?.chips || propChips || [
+    { key: 'all-inclusive', label: 'All Inclusive', icon: 'dining' },
+    { key: 'entertainment', label: 'Entertainment', icon: 'entertainment' },
+    { key: 'fitness', label: 'Fitness', icon: 'fitness' },
+    { key: 'wellness', label: 'Wellness', icon: 'wellness' },
+    { key: 'sports', label: 'Sports', icon: 'sports' },
+    { key: 'watersports', label: 'Watersports', icon: 'watersports' },
+    { key: 'beach', label: 'Beach', icon: 'beach' },
+    { key: 'romance', label: 'Romance', icon: 'romance' }
+  ]);
+
   const ratingBadge = {
-    score: heroData.ratingScore || propRatingBadge?.score || '4.8/5',
-    reviews: heroData.ratingReviews || propRatingBadge?.reviews || '900 reviews'
+    score: useVariantData ? (variantData.ratingScore || propRatingBadge?.score || '4.8/5')
+      : (heroData?.ratingScore || propRatingBadge?.score || '4.8/5'),
+    reviews: useVariantData ? (variantData.ratingReviews || propRatingBadge?.reviews || '900 reviews')
+      : (heroData?.ratingReviews || propRatingBadge?.reviews || '900 reviews')
   };
+
+  // Get chip images from the appropriate source
+  const chipImages = useVariantData ? (variantData.chipImages || {}) : (heroData?.chipImages || {});
   // Star icon component
   const StarIcon = ({ filled = true }) => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,10 +112,10 @@ const ResortHero = ({
   // Chip icon component
   const ChipIcon = ({ type, chipKey }) => {
     // Check if there's a custom uploaded image for this chip
-    if (heroData.chipImages && heroData.chipImages[chipKey]) {
+    if (chipImages && chipImages[chipKey]) {
       return (
         <img
-          src={`/storage/${heroData.chipImages[chipKey]}`}
+          src={`/storage/${chipImages[chipKey]}`}
           alt={type}
           style={{ width: '30px', height: '30px', objectFit: 'cover' }}
         />

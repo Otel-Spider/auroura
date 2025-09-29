@@ -186,7 +186,6 @@ const VerticalSpotlightSlider = ({
       rel="preload"
       as="image"
       href={slide.image}
-      fetchPriority="high"
     />
   ));
 
@@ -248,7 +247,6 @@ const VerticalSpotlightSlider = ({
                       alt={activeSlide.title}
                       loading="eager"
                       decoding="async"
-                      fetchPriority="high"
                     />
                   </div>
                 </div>
@@ -307,7 +305,6 @@ const VerticalSpotlightSlider = ({
                   alt={activeSlide.title}
                   loading="eager"
                   decoding="async"
-                  fetchPriority="high"
                 />
               </div>
 

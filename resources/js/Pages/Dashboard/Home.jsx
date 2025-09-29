@@ -64,6 +64,20 @@ export default function Home({ auth }) {
                           </Card>
                         </Link>
                       </Col>
+
+                      <Col xs={12} sm={6} md={4} lg={3}>
+                        <Link href="/dashboard/home/customization" as="div" className="text-decoration-none">
+                          <Card className="h-100 home-banner-card">
+                            <Card.Body className="p-3">
+                              <div className="mb-2">
+                                <RiIcons.RiLayoutLine size={32} className="text-warning" />
+                              </div>
+                              <h6 className="mb-1 card-title">Home Customization</h6>
+                              <p className="mb-0 text-muted small">Drag and drop to reorder home page components</p>
+                            </Card.Body>
+                          </Card>
+                        </Link>
+                      </Col>
                     </Row>
           </Container>
         </div>

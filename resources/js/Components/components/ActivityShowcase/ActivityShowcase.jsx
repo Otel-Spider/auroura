@@ -84,7 +84,6 @@ const ActivityShowcase = ({
                 keyboard={{ enabled: true }}
                 loop={true}
                 loopAdditionalSlides={2}
-                loopedSlides={2}
                 slidesPerView={2}
                 spaceBetween={28}
                 breakpoints={{
