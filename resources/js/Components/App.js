@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Header, SiteFooter } from './shared/components';
 import { footerData } from './shared/components/SiteFooter/footerData.jsx';
-import Home from './pages/Home.jsx';
+import Home from '../Pages/Front/Home.jsx';
 
 function App() {
     return (

@@ -1,23 +1,23 @@
 import React from 'react';
-import ResortHero from './components/ResortHero/ResortHero';
-import BookingBar from './components/BookingBar/BookingBar';
-import ResortIntroGallery from './components/ResortIntroGallery';
-import EntertainmentStrip from './components/EntertainmentStrip/EntertainmentStrip';
-import DiningCarousel, { diningData } from './components/DiningCarousel';
-import ActivityShowcase, { activityData } from './components/ActivityShowcase';
-import ActivitiesGrid, { activitiesData } from './components/ActivitiesGrid';
-import { WellnessPairsSlider, wellnessData } from './components/WellnessPairsSlider';
-import { OffersDeck, offersData } from './components/OffersDeck';
-import { EventsShowcase, eventsData } from './components/EventsShowcase';
-import { LocationMap, locationData } from './components/LocationMap';
-import { GuestReviews, guestReviewsData } from './components/GuestReviews';
-import { VerticalSpotlightSlider, spotlightData } from './components/VerticalSpotlightSlider';
-import { BecomeMember } from './components/BecomeMember';
-import { becomeMemberData, becomeMemberHandlers } from './components/BecomeMember/becomeMemberData';
-import Facilities from './components/Facilities';
-import { facilitiesData } from './components/Facilities/facilitiesData.jsx';
-import RoomsSection from './components/RoomsSection';
-import { roomsData } from './components/RoomsSection/roomsData';
+import ResortHero from './home/ResortHero/ResortHero';
+import BookingBar from './home/BookingBar/BookingBar';
+import ResortIntroGallery from './home/ResortIntroGallery';
+import EntertainmentStrip from './home/EntertainmentStrip/EntertainmentStrip';
+import DiningCarousel, { diningData } from './home/DiningCarousel';
+import ActivityShowcase, { activityData } from './home/ActivityShowcase';
+import ActivitiesGrid, { activitiesData } from './home/ActivitiesGrid';
+import { WellnessPairsSlider, wellnessData } from './home/WellnessPairsSlider';
+import { OffersDeck, offersData } from './home/OffersDeck';
+import { EventsShowcase, eventsData } from './home/EventsShowcase';
+import { LocationMap, locationData } from './home/LocationMap';
+import { GuestReviews, guestReviewsData } from './home/GuestReviews';
+import { VerticalSpotlightSlider, spotlightData } from './home/VerticalSpotlightSlider';
+import { BecomeMember } from './home/BecomeMember';
+import { becomeMemberData, becomeMemberHandlers } from './home/BecomeMember/becomeMemberData';
+import Facilities from './home/Facilities';
+import { facilitiesData } from './home/Facilities/facilitiesData.jsx';
+import RoomsSection from './home/RoomsSection';
+import { roomsData } from './home/RoomsSection/roomsData';
 
 // Component mapping object
 const componentMap = {

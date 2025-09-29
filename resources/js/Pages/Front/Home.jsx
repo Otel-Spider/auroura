@@ -1,23 +1,23 @@
 import React from 'react';
-import ResortHero from '../components/ResortHero/ResortHero';
-import BookingBar from '../components/BookingBar/BookingBar';
-import ResortIntroGallery from '../components/ResortIntroGallery';
-import EntertainmentStrip from '../components/EntertainmentStrip/EntertainmentStrip';
-import DiningCarousel, { diningData } from '../components/DiningCarousel';
-import ActivityShowcase, { activityData } from '../components/ActivityShowcase';
-import ActivitiesGrid, { activitiesData } from '../components/ActivitiesGrid';
-import { WellnessPairsSlider, wellnessData } from '../components/WellnessPairsSlider';
-import { OffersDeck, offersData } from '../components/OffersDeck';
-import { EventsShowcase, eventsData } from '../components/EventsShowcase';
-import { LocationMap, locationData } from '../components/LocationMap';
-import { GuestReviews, guestReviewsData } from '../components/GuestReviews';
-import { VerticalSpotlightSlider, spotlightData } from '../components/VerticalSpotlightSlider';
-import { BecomeMember } from '../components/BecomeMember';
-import { becomeMemberData, becomeMemberHandlers } from '../components/BecomeMember/becomeMemberData';
-import Facilities from '../components/Facilities';
-import { facilitiesData } from '../components/Facilities/facilitiesData';
-import RoomsSection from '../components/RoomsSection';
-import { roomsData, suitesData } from '../components/RoomsSection/roomsData';
+import ResortHero from '../../Components/home/ResortHero/ResortHero';
+import BookingBar from '../../Components/home/BookingBar/BookingBar';
+import ResortIntroGallery from '../../Components/home/ResortIntroGallery';
+import EntertainmentStrip from '../../Components/home/EntertainmentStrip/EntertainmentStrip';
+import DiningCarousel, { diningData } from '../../Components/home/DiningCarousel';
+import ActivityShowcase, { activityData } from '../../Components/home/ActivityShowcase';
+import ActivitiesGrid, { activitiesData } from '../../Components/home/ActivitiesGrid';
+import { WellnessPairsSlider, wellnessData } from '../../Components/home/WellnessPairsSlider';
+import { OffersDeck, offersData } from '../../Components/home/OffersDeck';
+import { EventsShowcase, eventsData } from '../../Components/home/EventsShowcase';
+import { LocationMap, locationData } from '../../Components/home/LocationMap';
+import { GuestReviews, guestReviewsData } from '../../Components/home/GuestReviews';
+import { VerticalSpotlightSlider, spotlightData } from '../../Components/home/VerticalSpotlightSlider';
+import { BecomeMember } from '../../Components/home/BecomeMember';
+import { becomeMemberData, becomeMemberHandlers } from '../../Components/home/BecomeMember/becomeMemberData';
+import Facilities from '../../Components/home/Facilities';
+import { facilitiesData } from '../../Components/home/Facilities/facilitiesData';
+import RoomsSection from '../../Components/home/RoomsSection';
+import { roomsData } from '../../Components/home/RoomsSection/roomsData';
 
 const Home = () => {
   const handleChipClick = (key) => {
@@ -68,7 +68,7 @@ const Home = () => {
         defaultVisible={9}
       />
       <RoomsSection
-        items={[...roomsData, ...suitesData]}
+        items={roomsData}
       />
       <EntertainmentStrip />
 
